@@ -1,0 +1,16 @@
+# Logs
+*.log
+
+# OS-specific
+.DS_Store
+
+# WebStorm/IDE
+.idea/
+*.iml
+
+# Dependency directories
+node_modules/
+
+# Build output
+dist/
+build/
