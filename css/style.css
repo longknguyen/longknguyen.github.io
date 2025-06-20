@@ -1,0 +1,11 @@
+/* GLOBAL STYLES */
+body {
+    margin: 0;
+    font-family: 'Roboto', sans-serif;
+    background: none; /* #ffffff; */
+    color: #fff;
+    scroll-behavior: smooth;
+    position: relative;
+    z-index: 0;
+}
+
