@@ -115,6 +115,8 @@ body {
     background: rgba(255, 255, 255, 0.2);
 }
 
+
+
 /* HOME SECTION */
 .home-section {
     position: relative;
@@ -194,5 +196,92 @@ body {
 .social-button i {
     width: 16px;
     height: 16px;
+}
+
+
+/*  GLASS CARD */
+.glass {
+    position: relative;
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(2px) saturate(180%);
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    border-radius: 2rem;
+    box-shadow: 0 8px 32px rgba(31, 38, 135, 0.2), inset 0 4px 20px rgba(255, 255, 255, 0.3);
+    padding: 2rem;
+    overflow: hidden;
+    color: #fff;
+    transition: transform 0.4s ease, opacity 0.4s ease;
+    opacity: 0;
+    transform: translateY(40px);
+}
+
+.glass.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.glass::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 2rem;
+    backdrop-filter: blur(1px);
+    box-shadow: inset -10px -8px 0px -11px rgba(255, 255, 255, 1),
+    inset 0px -9px 0px -8px rgba(255, 255, 255, 1);
+    opacity: 0.6;
+    z-index: -1;
+    filter: blur(1px) drop-shadow(10px 4px 6px black) brightness(115%);
+}
+
+.nav-glass {
+    background: rgba(255, 255, 255, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    backdrop-filter: blur(0.5rem);
+    box-shadow:
+            0 8px 32px rgba(31, 38, 135, 0.2),
+            inset 0 4px 20px rgba(255, 255, 255, 0.3);
+    border-radius: 999px;
+}
+
+
+.dark-glass {
+    position: relative;
+    background: rgba(0, 0, 0, 0.15);
+    backdrop-filter: blur(2px) saturate(180%);
+    border: 1px solid rgba(0, 0, 0, 0.6);
+    border-radius: 2rem;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2), inset 0 4px 20px rgba(0, 0, 0, 0.3);
+    padding: 2rem;
+    overflow: hidden;
+    color: #111;
+    transition: transform 0.4s ease, opacity 0.4s ease;
+    opacity: 0;
+    transform: translateY(40px);
+}
+
+.dark-glass.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.dark-glass::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.1);
+    border-radius: 2rem;
+    backdrop-filter: blur(1px);
+    box-shadow: inset -10px -8px 0px -11px rgba(0, 0, 0, 0.5),
+    inset 0px -9px 0px -8px rgba(0, 0, 0, 0.4);
+    opacity: 0.6;
+    z-index: -1;
+    filter: blur(1px) drop-shadow(10px 4px 6px rgba(0,0,0,0.3)) brightness(95%);
 }
 
