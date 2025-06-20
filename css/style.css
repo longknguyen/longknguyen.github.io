@@ -9,3 +9,108 @@ body {
     z-index: 0;
 }
 
+/* TOP NAVIGATION BAR */
+.top-nav {
+    position: fixed;
+    top: 1.5rem; /* give it space from top on sm+ screens */
+    left: 50%;
+    transform: translateX(-50%);
+    height: 3.25rem;
+    width: 90%;
+    max-width: 36rem;
+    padding: 0 1.5rem;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background: rgba(255, 255, 255, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    border-radius: 999px;
+    box-shadow:
+            0 8px 32px rgba(31, 38, 135, 0.2),
+            inset 0 4px 20px rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(0.5rem);
+    z-index: 1000;
+
+    transition: all 0.4s ease;
+}
+
+/* Hide toggle button by default */
+.nav-toggle-button {
+    display: none;
+    position: fixed;
+    top: 1.5rem;
+    left: 1.5rem;
+    width: 3.25rem;
+    height: 3.25rem;
+    background: rgba(255, 255, 255, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    border-radius: 50%;
+    backdrop-filter: blur(0.5rem);
+    box-shadow:
+            0 8px 32px rgba(31, 38, 135, 0.2),
+            inset 0 4px 20px rgba(255, 255, 255, 0.3);
+    color: white;
+    cursor: pointer;
+    align-items: center;
+    justify-content: center;
+    z-index: 1100;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+/* Hide full nav by default on small screens */
+@media (max-width: 640px) {
+    .top-nav {
+        width: 100%;
+        border-radius: 0;
+    }
+}
+
+
+
+.top-nav::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: inherit;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(1px);
+    box-shadow:
+            inset -10px -8px 0px -11px rgba(255, 255, 255, 0.6),
+            inset 0px -9px 0px -8px rgba(255, 255, 255, 0.4);
+    z-index: -1;
+}
+
+
+
+/* NAVIGATION LIST */
+.nav-list {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.nav-link {
+    font-size: 15px;
+    padding: 0.25rem 0.75rem;
+    gap: 0.3rem;
+    text-decoration: none;
+    color: #fff;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    border-radius: 999px;
+    transition: background 0.3s ease;
+    white-space: nowrap;
+}
+
+.nav-link:hover,
+.nav-link.active {
+    background: rgba(255, 255, 255, 0.2);
+}
