@@ -551,6 +551,7 @@ header.condensed.top-nav {
     display: none;
 }
 
+
 /* HEADER COLLAPSE */
 header.collapsed {
     opacity: 0;
@@ -597,3 +598,81 @@ header.collapsed {
     font-size: 1rem;
 }
 
+.contact-box {
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    align-items: stretch;
+}
+
+.glass-pill-input {
+    padding: 0.75rem 1.5rem;
+    border-radius: 999px;
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    background: rgba(255, 255, 255, 0.15);
+    color: #fff;
+    font-size: 1rem;
+    backdrop-filter: blur(2px);
+    box-shadow:
+            0 8px 32px rgba(31, 38, 135, 0.2),
+            inset 0 4px 20px rgba(255, 255, 255, 0.3);
+}
+
+.glass-pill-input::placeholder {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.glass-textarea {
+    padding: 1rem;
+    border-radius: 1rem;
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    background: rgba(255, 255, 255, 0.15);
+    color: #fff;
+    font-size: 1rem;
+    resize: vertical;
+    min-height: 120px;
+    backdrop-filter: blur(2px);
+    box-shadow:
+            0 8px 32px rgba(31, 38, 135, 0.2),
+            inset 0 4px 20px rgba(255, 255, 255, 0.3);
+}
+
+.glass-textarea::placeholder {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.glass-submit {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    border-radius: 999px;
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    background: rgba(255, 255, 255, 0.15);
+    color: #fff;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    backdrop-filter: blur(2px);
+    box-shadow:
+            0 8px 32px rgba(31, 38, 135, 0.2),
+            inset 0 4px 20px rgba(255, 255, 255, 0.3);
+    transition: background 0.3s ease;
+}
+
+.glass-submit:hover {
+    background: rgba(255, 255, 255, 0.25);
+}
+
+.glass-submit i {
+    width: 1em;
+    height: 1em;
+}
