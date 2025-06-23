@@ -10,6 +10,9 @@ RUN chmod +x ./gradlew
 
 RUN ./gradlew clean build --no-daemon --stacktrace --info
 
+# Debug: list files in build/libs to check JAR presence
+RUN ls -l build/libs
+
 FROM eclipse-temurin:21-jre
 
 WORKDIR /app
