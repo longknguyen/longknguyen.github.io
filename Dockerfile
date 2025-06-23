@@ -4,11 +4,12 @@ WORKDIR /app
 
 COPY . .
 
+RUN apt-get update && apt-get install -y findutils xargs && rm -rf /var/lib/apt/lists/*
+
 RUN chmod +x ./gradlew
 
 RUN ./gradlew clean build --no-daemon --stacktrace --info
 
-# Use runtime JRE for final image
 FROM eclipse-temurin:21-jre
 
 WORKDIR /app
