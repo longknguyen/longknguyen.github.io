@@ -4,7 +4,7 @@ WORKDIR /app
 
 COPY . .
 
-RUN apt-get update && apt-get install -y findutils xargs && rm -rf /var/lib/apt/lists/*
+RUN apt-get update && apt-get install -y findutils && rm -rf /var/lib/apt/lists/*
 
 RUN chmod +x ./gradlew
 
