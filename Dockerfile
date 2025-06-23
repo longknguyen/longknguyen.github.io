@@ -17,7 +17,7 @@ FROM eclipse-temurin:21-jre
 
 WORKDIR /app
 
-COPY --from=build /app/build/libs/czerny1728.github.io-1.0.jar ./app.jar
+COPY --from=build /app/build/libs/app-1.0.jar ./app.jar
 
 EXPOSE 8080
 
