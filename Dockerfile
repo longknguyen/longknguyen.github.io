@@ -5,7 +5,7 @@ WORKDIR /app
 COPY . .
 
 # Build the JAR
-RUN gradle clean build --no-daemon
+RUN ./gradlew clean build --no-daemon
 
 FROM eclipse-temurin:17-jre
 
