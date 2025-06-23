@@ -1,8 +1,17 @@
-FROM openjdk:17-jdk-alpine
+FROM gradle:7.6.1-jdk17 AS build
 
 WORKDIR /app
 
-COPY build/libs/czerny1728.github.io-1.0.jar app.jar
+COPY . .
+
+# Build the JAR
+RUN gradle clean build --no-daemon
+
+FROM eclipse-temurin:17-jre
+
+WORKDIR /app
+
+COPY --from=build /app/build/libs/czerny1728.github.io-1.0.jar ./app.jar
 
 EXPOSE 8080
 
