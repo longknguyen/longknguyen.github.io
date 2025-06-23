@@ -84,14 +84,52 @@ function loadSection(containerId, file) {
     fetch(file)
         .then(response => response.text())
         .then(html => {
-            document.getElementById(containerId).innerHTML = html;
+            const container = document.getElementById(containerId);
+            container.innerHTML = html;
             lucide.createIcons(); // Refresh icons
+
             document.querySelectorAll(`#${containerId} .glass, #${containerId} .dark-glass`).forEach(card => {
                 observer.observe(card);
             });
+
+            // If this is the contact form container, add the submit handler here:
+            if (containerId === 'contact-container') {
+                const contactForm = container.querySelector('.contact-form');
+                if (contactForm) {
+                    contactForm.addEventListener('submit', async (e) => {
+                        e.preventDefault();
+
+                        const email = contactForm.email.value.trim();
+                        const message = contactForm.message.value.trim();
+
+                        if (!email || !message) {
+                            alert('Please fill out both fields.');
+                            return;
+                        }
+
+                        try {
+                            const response = await fetch('http://localhost:8080/api/contact', {
+                                method: 'POST',
+                                headers: { 'Content-Type': 'application/json' },
+                                body: JSON.stringify({ email, message }),
+                            });
+
+                            if (response.ok) {
+                                alert('Thank you for your message!');
+                                contactForm.reset();
+                            } else {
+                                alert('There was a problem sending your message.');
+                            }
+                        } catch (error) {
+                            alert('Network error, please try again later.');
+                        }
+                    });
+                }
+            }
         })
         .catch(err => console.error(`Failed to load ${file}:`, err));
 }
+
 
 loadSection('projects-container', 'projects.html');
 loadSection('skills-container', 'skills.html');
@@ -99,27 +137,3 @@ loadSection('education-container', 'education.html');
 loadSection('contact-container', 'contact.html');
 
 // Handle contact form submission
-document.addEventListener('DOMContentLoaded', () => {
-    const contactForm = document.querySelector('.contact-form');
-
-    if (contactForm) {
-        contactForm.addEventListener('submit', (e) => {
-            e.preventDefault();
-
-            const email = contactForm.email.value.trim();
-            const message = contactForm.message.value.trim();
-
-            if (!email || !message) {
-                alert('Please fill out both fields.');
-                return;
-            }
-
-            console.log(`Email: ${email}`);
-            console.log(`Message: ${message}`);
-            alert('Thank you for your message!');
-
-            contactForm.reset();
-        });
-    }
-});
-
