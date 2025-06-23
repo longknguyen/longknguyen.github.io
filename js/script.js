@@ -98,3 +98,28 @@ loadSection('skills-container', 'skills.html');
 loadSection('education-container', 'education.html');
 loadSection('contact-container', 'contact.html');
 
+// Handle contact form submission
+document.addEventListener('DOMContentLoaded', () => {
+    const contactForm = document.querySelector('.contact-form');
+
+    if (contactForm) {
+        contactForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+
+            const email = contactForm.email.value.trim();
+            const message = contactForm.message.value.trim();
+
+            if (!email || !message) {
+                alert('Please fill out both fields.');
+                return;
+            }
+
+            console.log(`Email: ${email}`);
+            console.log(`Message: ${message}`);
+            alert('Thank you for your message!');
+
+            contactForm.reset();
+        });
+    }
+});
+
