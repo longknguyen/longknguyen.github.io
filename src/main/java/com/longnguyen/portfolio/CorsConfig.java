@@ -13,7 +13,7 @@ public class CorsConfig {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/api/contact")
-                        .allowedOrigins("http://localhost:63343") //  frontend URL
+                        .allowedOrigins("https://longuyen.co.uk") //  frontend URL
                         .allowedMethods("POST");
             }
         };
