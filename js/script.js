@@ -136,4 +136,10 @@ loadSection('skills-container', 'skills.html');
 loadSection('education-container', 'education.html');
 loadSection('contact-container', 'contact.html');
 
-// Handle contact form submission
+window.addEventListener('load', () => {
+    document.querySelector('.profile-pic').classList.add('animate-in');
+    document.querySelector('.top-nav').classList.add('animate-in');
+    document.querySelector('.social-links').classList.add('animate-in');
+    document.querySelector('.intro-heading').classList.add('animate-in');
+    document.querySelector('.intro-subtext').classList.add('animate-in');
+});
