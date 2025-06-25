@@ -556,6 +556,14 @@ header.condensed.top-nav {
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
+    opacity: 0;
+    transform: translateX(-50px);
+    transition: transform 0.6s ease-out, opacity 0.6s ease-out;
+}
+
+.skills-category.visible {
+    opacity: 1;
+    transform: translateX(0);
 }
 
 .skills-row {
@@ -612,6 +620,15 @@ header.condensed.top-nav {
     height: 1px;
     background: rgba(255, 255, 255, 0.6);
     margin: 0.5rem 0 1rem;
+
+    opacity: 0;
+    transform: translateX(-50px);
+    transition: transform 0.6s ease-out, opacity 0.6s ease-out;
+}
+
+.category-divider.visible {
+    opacity: 1;
+    transform: translateX(0);
 }
 
 .skills-category:last-child .category-divider {

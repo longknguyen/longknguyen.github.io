@@ -53,7 +53,7 @@ document.querySelectorAll('.glass, .dark-glass').forEach(card => {
     observer.observe(card);
 });
 
-// 🧭 Toggle button for menu nav behavior
+// Toggle button for menu nav behavior
 menuToggle.addEventListener('click', () => {
     const expanded = menuToggle.getAttribute('aria-expanded') === 'true';
     menuToggle.setAttribute('aria-expanded', !expanded);
@@ -92,7 +92,41 @@ function loadSection(containerId, file) {
                 observer.observe(card);
             });
 
-            // If this is the contact form container, add the submit handler here:
+            if (containerId === 'skills-container') {
+                const skillCategories = container.querySelectorAll('.skills-category');
+                let skillsAnimated = false;
+
+                function animateSkillsOnScroll() {
+                    if (!skillsAnimated) {
+                        const skillsSection = container.querySelector('#skills');
+                        if (skillsSection) {
+                            const sectionTop = skillsSection.getBoundingClientRect().top;
+                            const sectionVisible = window.innerHeight * 0.8;
+
+                            if (sectionTop < sectionVisible) {
+                                skillsAnimated = true;
+                                skillCategories.forEach((category, index) => {
+                                    setTimeout(() => {
+                                        category.classList.add('visible');
+
+                                        const nextDivider = category.nextElementSibling;
+                                        if (nextDivider && nextDivider.classList.contains('category-divider')) {
+                                            nextDivider.classList.add('visible');
+                                        }
+                                    }, index * 400);
+                                });
+                            }
+                        }
+                    }
+                }
+
+                window.addEventListener('scroll', () => {
+                    animateSkillsOnScroll();
+                });
+
+                animateSkillsOnScroll();
+            }
+
             if (containerId === 'contact-container') {
                 const contactForm = container.querySelector('.contact-form');
                 if (contactForm) {
