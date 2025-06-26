@@ -80,6 +80,30 @@ navLinks.forEach(link => {
     });
 });
 
+function setupSkillsObserver(container) {
+    const categories = container.querySelectorAll('.skills-category');
+
+    const categoryObserver = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+
+                const nextDivider = entry.target.nextElementSibling;
+                if (nextDivider && nextDivider.classList.contains('category-divider')) {
+                    nextDivider.classList.add('visible');
+                }
+
+                // Stop observing once animated
+                categoryObserver.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.3 });
+
+    categories.forEach(category => {
+        categoryObserver.observe(category);
+    });
+}
+
 function loadSection(containerId, file) {
     fetch(file)
         .then(response => response.text())
@@ -93,38 +117,7 @@ function loadSection(containerId, file) {
             });
 
             if (containerId === 'skills-container') {
-                const skillCategories = container.querySelectorAll('.skills-category');
-                let skillsAnimated = false;
-
-                function animateSkillsOnScroll() {
-                    if (!skillsAnimated) {
-                        const skillsSection = container.querySelector('#skills');
-                        if (skillsSection) {
-                            const sectionTop = skillsSection.getBoundingClientRect().top;
-                            const sectionVisible = window.innerHeight * 0.8;
-
-                            if (sectionTop < sectionVisible) {
-                                skillsAnimated = true;
-                                skillCategories.forEach((category, index) => {
-                                    setTimeout(() => {
-                                        category.classList.add('visible');
-
-                                        const nextDivider = category.nextElementSibling;
-                                        if (nextDivider && nextDivider.classList.contains('category-divider')) {
-                                            nextDivider.classList.add('visible');
-                                        }
-                                    }, index * 400);
-                                });
-                            }
-                        }
-                    }
-                }
-
-                window.addEventListener('scroll', () => {
-                    animateSkillsOnScroll();
-                });
-
-                animateSkillsOnScroll();
+                setupSkillsObserver(container);
             }
 
             if (containerId === 'contact-container') {
