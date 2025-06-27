@@ -734,7 +734,7 @@ header.collapsed {
 
 .glass-submit {
     position: relative;
-    overflow: hidden;
+    overflow: visible;
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -763,66 +763,66 @@ header.collapsed {
     height: 1em;
 }
 
-.mail-animation-wrapper {
-    position: relative;
-    width: 0;
-    height: 0;
-}
 
-.flying-mail {
-    position: relative;
-    z-index: 1;
-    top: 0;
-    left: 0;
-    transform: scale(1);
+.sending-dots {
+    display: inline-flex;
+    gap: 0.1em;
+    margin-left: 0.3em;
+    font-weight: bold;
     opacity: 1;
-    transition: transform 0.6s ease, opacity 0.4s ease;
+    transition: opacity 0.3s ease;
 }
 
-.flying-mail.fly {
-    position: absolute;
-    top: 50%;
-    left: 1rem;
-    transform: translate(120px, -80px) scale(0.5);
+.sending-dots.hidden {
     opacity: 0;
+    pointer-events: none;
 }
 
-.postbox {
-    position: absolute;
-    top: -60px;
-    left: 120px;
-    width: 40px;
-    height: 40px;
-    color: white;
-    opacity: 0;
-    transform: scale(0.5);
-    transition: transform 0.3s ease, opacity 0.3s ease;
+.dot {
+    animation: bounce 1s infinite;
 }
 
-.postbox.show {
-    opacity: 1;
-    transform: scale(1);
+.dot:nth-child(2) {
+    animation-delay: 0.2s;
 }
 
-.flying-mail.loop {
-    animation: loop-de-loop 0.6s ease-out infinite;
-}
-@keyframes loop-de-loop {
-    0%   { transform: translate(0,0) rotate(0deg); }
-    50%  { transform: translate(30px,-30px) rotate(180deg); }
-    100% { transform: translate(0,0) rotate(360deg); }
+.dot:nth-child(3) {
+    animation-delay: 0.4s;
 }
 
-.flying-mail::after {
-    content: '';
-    position: absolute;
-    width: 4px; height: 4px;
-    background: rgba(255,255,255,0.7);
-    border-radius: 50%;
-    animation: trail 0.5s forwards;
+@keyframes bounce {
+    0%, 80%, 100% {
+        transform: translateY(0);
+    }
+    40% {
+        transform: translateY(-0.4em);
+    }
 }
-@keyframes trail {
-    to { opacity: 0; transform: translate(60px,-30px); }
+
+.send-label.implode {
+    animation: implode 0.4s forwards;
+}
+
+@keyframes implode {
+    to {
+        transform: scale(0);
+        opacity: 0;
+    }
+}
+
+.glass-submit.explode {
+    animation: explode 0.5s ease-out forwards;
+}
+
+@keyframes explode {
+    0% {
+        transform: scale(0.4);
+        opacity: 0;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
 }
 
 .send-label {

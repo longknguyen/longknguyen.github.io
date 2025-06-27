@@ -127,11 +127,9 @@ function loadSection(containerId, file) {
                         e.preventDefault();
                         lucide.createIcons();
 
-                        const mailIcon = contactForm.querySelector('.flying-mail');
-                        const postbox = contactForm.querySelector('.postbox');
                         const sendLabel = contactForm.querySelector('.send-label');
+                        const dots = contactForm.querySelector('.sending-dots');
                         const sendButton = contactForm.querySelector('.glass-submit');
-
                         const email = contactForm.email.value.trim();
                         const message = contactForm.message.value.trim();
 
@@ -140,14 +138,12 @@ function loadSection(containerId, file) {
                             return;
                         }
 
-                        mailIcon.classList.add('loop');
-                        sendLabel.classList.add('hidden');
+                        // Step 1: Start Sending...
+                        sendLabel.textContent = 'Sending';
+                        dots.classList.remove('hidden');
 
-                        setTimeout(() => {
-                            mailIcon.classList.remove('loop');
-                            mailIcon.classList.add('fly');
-                            postbox.classList.add('show');
-                        }, 1000);
+                        let resultIcon = 'check-circle';
+                        let resultText = 'Message Sent!';
 
                         try {
                             const response = await fetch('https://czerny1728-github-io.onrender.com/api/contact', {
@@ -156,23 +152,40 @@ function loadSection(containerId, file) {
                                 body: JSON.stringify({ email, message }),
                             });
 
-                            if (response.ok) {
-                                sendButton.innerHTML = '<i data-lucide="check-circle"></i> Message Sent!';
-                            } else {
-                                sendButton.innerHTML = '<i data-lucide="alert-triangle"></i> Sending Failed';
+                            if (!response.ok) {
+                                resultIcon = 'alert-triangle';
+                                resultText = 'Sending Failed';
                             }
                         } catch (error) {
-                            sendButton.innerHTML = '<i data-lucide="wifi-off"></i> Network Error';
-                        } finally {
-                            lucide.createIcons();
-
-                            setTimeout(() => {
-                                postbox.classList.remove('show');
-                                mailIcon.classList.remove('fly');
-                                sendButton.innerHTML = '<i data-lucide="send" class="flying-mail"></i> <span class="send-label">Send</span>';
-                                lucide.createIcons();
-                            }, 1500);
+                            resultIcon = 'wifi-off';
+                            resultText = 'Network Error';
                         }
+
+                        // Step 2: Implode dots and label
+                        sendLabel.classList.add('implode');
+                        dots.classList.add('hidden');
+
+                        // Step 3: Explode final message after short delay
+                        setTimeout(() => {
+                            sendButton.classList.add('explode');
+                            sendButton.innerHTML = `<i data-lucide="${resultIcon}"></i> ${resultText}`;
+                            lucide.createIcons();
+                        }, 300);
+
+                        // Step 4: Reset form after another delay
+                        setTimeout(() => {
+                            sendButton.classList.remove('explode');
+                            sendButton.innerHTML = `
+                            <span class="send-label">Send</span>
+                            <span class="sending-dots hidden">
+                                <span class="dot">.</span>
+                                <span class="dot">.</span>
+                                <span class="dot">.</span>
+                            </span>
+                            `;
+                            lucide.createIcons();
+                            contactForm.reset();
+                        }, 2500);
                     });
                 }
             }
