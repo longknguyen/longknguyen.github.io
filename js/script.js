@@ -176,6 +176,7 @@ function loadSection(containerId, file) {
                         setTimeout(() => {
                             sendButton.classList.remove('explode');
                             sendButton.innerHTML = `
+                            <i data-lucide="send" class="send-icon"></i>
                             <span class="send-label">Send</span>
                             <span class="sending-dots hidden">
                                 <span class="dot">.</span>
