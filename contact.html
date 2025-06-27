@@ -6,9 +6,16 @@
         <form class="contact-form">
             <input type="email" name="email" placeholder="Your email" class="glass-pill-input" required />
             <textarea name="message" placeholder="Your message" class="glass-textarea" rows="4" required></textarea>
+
             <button type="submit" class="glass-submit">
-                <i data-lucide="send"></i> Send
+                <i data-lucide="send" class="flying-mail"></i>
+                <span class="send-label">Send</span>
             </button>
+
+            <div class="mail-animation-wrapper">
+                <i data-lucide="mailbox" class="postbox"></i>
+            </div>
+
         </form>
     </div>
 </section>

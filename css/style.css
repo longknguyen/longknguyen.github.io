@@ -733,6 +733,8 @@ header.collapsed {
 }
 
 .glass-submit {
+    position: relative;
+    overflow: hidden;
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -759,4 +761,75 @@ header.collapsed {
 .glass-submit i {
     width: 1em;
     height: 1em;
+}
+
+.mail-animation-wrapper {
+    position: relative;
+    width: 0;
+    height: 0;
+}
+
+.flying-mail {
+    position: relative;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    transform: scale(1);
+    opacity: 1;
+    transition: transform 0.6s ease, opacity 0.4s ease;
+}
+
+.flying-mail.fly {
+    position: absolute;
+    top: 50%;
+    left: 1rem;
+    transform: translate(120px, -80px) scale(0.5);
+    opacity: 0;
+}
+
+.postbox {
+    position: absolute;
+    top: -60px;
+    left: 120px;
+    width: 40px;
+    height: 40px;
+    color: white;
+    opacity: 0;
+    transform: scale(0.5);
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.postbox.show {
+    opacity: 1;
+    transform: scale(1);
+}
+
+.flying-mail.loop {
+    animation: loop-de-loop 0.6s ease-out infinite;
+}
+@keyframes loop-de-loop {
+    0%   { transform: translate(0,0) rotate(0deg); }
+    50%  { transform: translate(30px,-30px) rotate(180deg); }
+    100% { transform: translate(0,0) rotate(360deg); }
+}
+
+.flying-mail::after {
+    content: '';
+    position: absolute;
+    width: 4px; height: 4px;
+    background: rgba(255,255,255,0.7);
+    border-radius: 50%;
+    animation: trail 0.5s forwards;
+}
+@keyframes trail {
+    to { opacity: 0; transform: translate(60px,-30px); }
+}
+
+.send-label {
+    margin-left: 0.5rem;
+    transition: opacity 0.3s ease;
+}
+
+.send-label.hidden {
+    opacity: 0;
 }

@@ -110,7 +110,7 @@ function loadSection(containerId, file) {
         .then(html => {
             const container = document.getElementById(containerId);
             container.innerHTML = html;
-            lucide.createIcons(); // Refresh icons
+            lucide.createIcons();
 
             document.querySelectorAll(`#${containerId} .glass, #${containerId} .dark-glass`).forEach(card => {
                 observer.observe(card);
@@ -125,14 +125,29 @@ function loadSection(containerId, file) {
                 if (contactForm) {
                     contactForm.addEventListener('submit', async (e) => {
                         e.preventDefault();
+                        lucide.createIcons();
+
+                        const mailIcon = contactForm.querySelector('.flying-mail');
+                        const postbox = contactForm.querySelector('.postbox');
+                        const sendLabel = contactForm.querySelector('.send-label');
+                        const sendButton = contactForm.querySelector('.glass-submit');
 
                         const email = contactForm.email.value.trim();
                         const message = contactForm.message.value.trim();
 
                         if (!email || !message) {
-                            alert('Please fill out both fields.');
+                            alert('Fill both fields');
                             return;
                         }
+
+                        mailIcon.classList.add('loop');
+                        sendLabel.classList.add('hidden');
+
+                        setTimeout(() => {
+                            mailIcon.classList.remove('loop');
+                            mailIcon.classList.add('fly');
+                            postbox.classList.add('show');
+                        }, 1000);
 
                         try {
                             const response = await fetch('https://czerny1728-github-io.onrender.com/api/contact', {
@@ -142,13 +157,21 @@ function loadSection(containerId, file) {
                             });
 
                             if (response.ok) {
-                                alert('Thank you for your message!');
-                                contactForm.reset();
+                                sendButton.innerHTML = '<i data-lucide="check-circle"></i> Message Sent!';
                             } else {
-                                alert('There was a problem sending your message.');
+                                sendButton.innerHTML = '<i data-lucide="alert-triangle"></i> Sending Failed';
                             }
                         } catch (error) {
-                            alert('Network error, please try again later.');
+                            sendButton.innerHTML = '<i data-lucide="wifi-off"></i> Network Error';
+                        } finally {
+                            lucide.createIcons();
+
+                            setTimeout(() => {
+                                postbox.classList.remove('show');
+                                mailIcon.classList.remove('fly');
+                                sendButton.innerHTML = '<i data-lucide="send" class="flying-mail"></i> <span class="send-label">Send</span>';
+                                lucide.createIcons();
+                            }, 1500);
                         }
                     });
                 }
