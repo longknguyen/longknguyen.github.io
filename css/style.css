@@ -73,7 +73,7 @@ body {
     transition: opacity 0.3s ease, transform 0.3s ease;
 }
 
-@media (max-width: 640px) {
+@media (max-width: 850px) {
     .top-nav {
         height: 3rem; /* smaller height */
         max-width: 20rem; /* slightly narrower bar */
@@ -92,7 +92,7 @@ body {
 
     .project-thumb,
     .project-image {
-        display: none;
+        display: none !important;
     }
 }
 
@@ -418,17 +418,13 @@ header.condensed.top-nav {
 
 .project-image {
     flex-shrink: 0;
-    width: 300px;
+    width: 400px;
     height: auto;
     margin-block: auto;
     border-radius: 1rem;
     overflow: hidden;
     box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
     align-items: center;
-
-    display: flex;
-    align-self: center;
-    justify-content: center;
 }
 
 .project-image img {
