@@ -93,7 +93,6 @@ function setupSkillsObserver(container) {
                     nextDivider.classList.add('visible');
                 }
 
-                // Stop observing once animated
                 categoryObserver.unobserve(entry.target);
             }
         });
