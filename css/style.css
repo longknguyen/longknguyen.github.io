@@ -73,28 +73,6 @@ body {
     transition: opacity 0.3s ease, transform 0.3s ease;
 }
 
-@media (max-width: 850px) {
-    .top-nav {
-        height: 3rem; /* smaller height */
-        max-width: 20rem; /* slightly narrower bar */
-        padding: 0 1rem; /* less horizontal padding */
-        overflow: hidden;
-    }
-
-    .nav-text {
-        display: none;
-    }
-
-    .nav-link {
-        padding: 0.20rem;
-        justify-content: center;
-    }
-
-    .project-thumb,
-    .project-image {
-        display: none !important;
-    }
-}
 
 @media (max-width: 400px) {
     /*TODO:*/
@@ -660,11 +638,11 @@ header.collapsed {
 }
 
 .university-logo {
-    width: 160px;  /* adjust as needed */
+    width: 160px;
     height: auto;
-    border-radius: 12px; /* optional, for rounding */
+    border-radius: 12px; /* for rounding */
     object-fit: contain;
-    flex-shrink: 0; /* prevent shrinking */
+    flex-shrink: 0;
 }
 
 .education-info {
@@ -839,4 +817,30 @@ header.collapsed {
 
 .send-label.hidden {
     opacity: 0;
+}
+
+@media (max-width: 850px) {
+    .top-nav {
+        height: 3rem; /* smaller height */
+        max-width: 20rem; /* slightly narrower bar */
+        padding: 0 1rem; /* less horizontal padding */
+        overflow: hidden;
+    }
+
+    .nav-text {
+        display: none;
+    }
+
+    .nav-link {
+        justify-content: center;
+    }
+
+    .project-thumb,
+    .project-image {
+        display: none !important;
+    }
+
+    .university-logo {
+        width: 100px
+    }
 }
