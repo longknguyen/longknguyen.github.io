@@ -81,25 +81,49 @@ navLinks.forEach(link => {
 });
 
 function setupSkillsObserver(container) {
-    const categories = container.querySelectorAll('.skills-category');
+    const categories = Array.from(container.querySelectorAll('.skills-category'));
+    const dividers = Array.from(container.querySelectorAll('.category-divider'));
 
-    const categoryObserver = new IntersectionObserver(entries => {
+    let index = 0;
+
+    function animateNext() {
+        if (index >= categories.length) return;
+
+        const category = categories[index];
+        const divider = dividers[index];
+
+        category.classList.add('visible');
+
+        if (divider) {
+            divider.classList.add('visible');
+        }
+
+        const onAnimationEnd = () => {
+            category.removeEventListener('animationend', onAnimationEnd);
+            index++;
+            animateNext();
+        };
+
+        setTimeout(() => {
+            category.removeEventListener('animationend', onAnimationEnd);
+            index++;
+            animateNext();
+        }, 700);
+
+        category.addEventListener('animationend', onAnimationEnd);
+    }
+
+    const sequentialObserver = new IntersectionObserver(entries => {
         entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('visible');
-
-                const nextDivider = entry.target.nextElementSibling;
-                if (nextDivider && nextDivider.classList.contains('category-divider')) {
-                    nextDivider.classList.add('visible');
-                }
-
-                categoryObserver.unobserve(entry.target);
+            if (entry.isIntersecting && categories.indexOf(entry.target) === index) {
+                sequentialObserver.unobserve(entry.target);
+                animateNext();
             }
         });
     }, { threshold: 0.3 });
 
     categories.forEach(category => {
-        categoryObserver.observe(category);
+        sequentialObserver.observe(category);
     });
 }
 
