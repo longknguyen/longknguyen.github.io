@@ -239,6 +239,8 @@ window.addEventListener('load', () => {
             window.scrollTo(0, savedScrollY);
         }
 
+        onScroll();
+
         document.documentElement.classList.remove('pre-scroll-lock');
         document.body.classList.remove('pre-scroll-lock');
     });
