@@ -1,4 +1,9 @@
 /* GLOBAL STYLES */
+html.pre-scroll-lock,
+body.pre-scroll-lock {
+    overflow: hidden;
+}
+
 body {
     margin: 0;
     font-family: 'Roboto', sans-serif;

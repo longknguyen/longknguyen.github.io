@@ -128,7 +128,7 @@ function setupSkillsObserver(container) {
 }
 
 function loadSection(containerId, file) {
-    fetch(file)
+    return fetch(file)
         .then(response => response.text())
         .then(html => {
             const container = document.getElementById(containerId);
@@ -218,10 +218,13 @@ function loadSection(containerId, file) {
 }
 
 
-loadSection('projects-container', 'projects.html');
-loadSection('skills-container', 'skills.html');
-loadSection('education-container', 'education.html');
-loadSection('contact-container', 'contact.html');
+const sectionPromises = [
+    loadSection('projects-container', 'projects.html'),
+    loadSection('skills-container', 'skills.html'),
+    loadSection('education-container', 'education.html'),
+    loadSection('contact-container', 'contact.html')
+];
+
 
 window.addEventListener('load', () => {
     document.querySelector('.profile-pic').classList.add('animate-in');
@@ -230,12 +233,15 @@ window.addEventListener('load', () => {
     document.querySelector('.intro-heading').classList.add('animate-in');
     document.querySelector('.intro-subtext').classList.add('animate-in');
 
-    setTimeout(() => {
+    Promise.all(sectionPromises).then(() => {
         const savedScrollY = parseInt(sessionStorage.getItem('scrollY'), 10);
         if (!isNaN(savedScrollY)) {
             window.scrollTo(0, savedScrollY);
         }
-    }, 500);
+
+        document.documentElement.classList.remove('pre-scroll-lock');
+        document.body.classList.remove('pre-scroll-lock');
+    });
 });
 
 window.addEventListener('beforeunload', () => {
