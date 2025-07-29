@@ -229,4 +229,15 @@ window.addEventListener('load', () => {
     document.querySelector('.social-links').classList.add('animate-in');
     document.querySelector('.intro-heading').classList.add('animate-in');
     document.querySelector('.intro-subtext').classList.add('animate-in');
+
+    setTimeout(() => {
+        const savedScrollY = parseInt(localStorage.getItem('scrollY'), 10);
+        if (!isNaN(savedScrollY)) {
+            window.scrollTo(0, savedScrollY);
+        }
+    }, 500);
+});
+
+window.addEventListener('beforeunload', () => {
+    localStorage.setItem('scrollY', window.scrollY);
 });
