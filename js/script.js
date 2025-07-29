@@ -241,8 +241,11 @@ window.addEventListener('load', () => {
 
         onScroll();
 
-        document.documentElement.classList.remove('pre-scroll-lock');
-        document.body.classList.remove('pre-scroll-lock');
+        requestAnimationFrame(() => {
+            onScroll();
+            document.documentElement.classList.remove('pre-scroll-lock');
+            document.body.classList.remove('pre-scroll-lock');
+        });
     });
 });
 
