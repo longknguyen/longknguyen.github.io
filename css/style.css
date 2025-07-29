@@ -299,7 +299,7 @@ header.condensed.top-nav {
     text-align: center;
     margin-bottom: 2rem;
 }
-/* LIQUID GLASS CARD */
+/* GLASS CARD */
 .glass {
     position: relative;
     background: rgba(255, 255, 255, 0.15);
@@ -837,7 +837,7 @@ header.collapsed {
 
     .project-thumb,
     .project-image {
-        display: none !important;
+        display: none;
     }
 
     .university-logo {
