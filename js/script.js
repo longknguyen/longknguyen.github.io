@@ -83,11 +83,17 @@ navLinks.forEach(link => {
 function setupSkillsObserver(container) {
     const categories = Array.from(container.querySelectorAll('.skills-category'));
     const dividers = Array.from(container.querySelectorAll('.category-divider'));
-    let index = 0;
-    let triggered = false;
+    const animationQueue = [];
+    let animating = false;
 
     function animateNext() {
-        if (index >= categories.length) return;
+        if (animationQueue.length === 0) {
+            animating = false;
+            return;
+        }
+
+        animating = true;
+        const index = animationQueue.shift();
 
         const category = categories[index];
         const divider = dividers[index];
@@ -95,32 +101,26 @@ function setupSkillsObserver(container) {
         category.classList.add('visible');
         if (divider) divider.classList.add('visible');
 
-        const onAnimationEnd = () => {
-            category.removeEventListener('animationend', onAnimationEnd);
-            index++;
-            animateNext();
-        };
-
         setTimeout(() => {
-            category.removeEventListener('animationend', onAnimationEnd);
-            index++;
             animateNext();
         }, 500);
-
-        category.addEventListener('animationend', onAnimationEnd);
     }
 
-    const sectionObserver = new IntersectionObserver(entries => {
+    const categoryObserver = new IntersectionObserver(entries => {
         entries.forEach(entry => {
-            if (entry.isIntersecting && !triggered) {
-                triggered = true;
-                sectionObserver.unobserve(entry.target);
-                animateNext();
+            const index = categories.indexOf(entry.target);
+
+            if (entry.isIntersecting && !entry.target.classList.contains('visible')) {
+                animationQueue.push(index);
+
+                if (!animating) {
+                    animateNext();
+                }
             }
         });
-    }, { threshold: 0.1 });
+    }, { threshold: 0.7 });
 
-    sectionObserver.observe(container);
+    categories.forEach(category => categoryObserver.observe(category));
 }
 
 function loadSection(containerId, file) {
