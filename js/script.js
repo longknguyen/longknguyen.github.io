@@ -234,21 +234,17 @@ window.addEventListener('load', () => {
     document.querySelector('.intro-subtext').classList.add('animate-in');
 
     Promise.all(sectionPromises).then(() => {
-        requestAnimationFrame(() => {
-            const savedScrollY = parseInt(sessionStorage.getItem('scrollY'), 10);
+        const savedScrollY = parseInt(sessionStorage.getItem('scrollY'), 10);
+        if (!isNaN(savedScrollY)) {
+            window.scrollTo(0, savedScrollY);
+        }
 
-            setTimeout(() => {
-                if (!isNaN(savedScrollY)) {
-                    window.scrollTo({ top: savedScrollY, behavior: 'auto' });
-                }
 
                 requestAnimationFrame(() => {
                     onScroll();
                     document.documentElement.classList.remove('pre-scroll-lock');
                     document.body.classList.remove('pre-scroll-lock');
                 });
-            }, 50);
-        });
     });
 });
 
