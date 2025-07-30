@@ -1,9 +1,6 @@
 /* GLOBAL STYLES */
-html.pre-scroll-lock {
-    overflow: hidden;
-    scroll-behavior: auto !important;
-}
 
+html.pre-scroll-lock,
 body.pre-scroll-lock {
     overflow: hidden;
 }

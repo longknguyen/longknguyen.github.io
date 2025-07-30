@@ -83,8 +83,8 @@ navLinks.forEach(link => {
 function setupSkillsObserver(container) {
     const categories = Array.from(container.querySelectorAll('.skills-category'));
     const dividers = Array.from(container.querySelectorAll('.category-divider'));
-
     let index = 0;
+    let triggered = false;
 
     function animateNext() {
         if (index >= categories.length) return;
@@ -93,10 +93,7 @@ function setupSkillsObserver(container) {
         const divider = dividers[index];
 
         category.classList.add('visible');
-
-        if (divider) {
-            divider.classList.add('visible');
-        }
+        if (divider) divider.classList.add('visible');
 
         const onAnimationEnd = () => {
             category.removeEventListener('animationend', onAnimationEnd);
@@ -108,23 +105,22 @@ function setupSkillsObserver(container) {
             category.removeEventListener('animationend', onAnimationEnd);
             index++;
             animateNext();
-        }, 700);
+        }, 500);
 
         category.addEventListener('animationend', onAnimationEnd);
     }
 
-    const sequentialObserver = new IntersectionObserver(entries => {
+    const sectionObserver = new IntersectionObserver(entries => {
         entries.forEach(entry => {
-            if (entry.isIntersecting && categories.indexOf(entry.target) === index) {
-                sequentialObserver.unobserve(entry.target);
+            if (entry.isIntersecting && !triggered) {
+                triggered = true;
+                sectionObserver.unobserve(entry.target);
                 animateNext();
             }
         });
-    }, { threshold: 0.3 });
+    }, { threshold: 0.1 });
 
-    categories.forEach(category => {
-        sequentialObserver.observe(category);
-    });
+    sectionObserver.observe(container);
 }
 
 function loadSection(containerId, file) {
