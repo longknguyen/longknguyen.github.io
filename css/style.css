@@ -1,5 +1,9 @@
 /* GLOBAL STYLES */
-html.pre-scroll-lock,
+html.pre-scroll-lock {
+    overflow: hidden;
+    scroll-behavior: auto !important;
+}
+
 body.pre-scroll-lock {
     overflow: hidden;
 }
@@ -110,7 +114,7 @@ header.condensed .nav-toggle-button {
     transition: opacity 0.3s ease;
 }
 
-/* Optional: reduce header height when condensed */
+/* Reduce header height when condensed */
 header.condensed.top-nav {
     height: 3.25rem;
     width: 3.25rem;
@@ -136,8 +140,6 @@ header.condensed.top-nav {
             inset 0px -9px 0px -8px rgba(255, 255, 255, 0.4);
     z-index: -1;
 }
-
-
 
 /* NAVIGATION LIST */
 .nav-list {
@@ -167,8 +169,6 @@ header.condensed.top-nav {
 .nav-link.active {
     background: rgba(255, 255, 255, 0.2);
 }
-
-
 
 /* HOME SECTION */
 .home-section {

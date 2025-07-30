@@ -234,17 +234,20 @@ window.addEventListener('load', () => {
     document.querySelector('.intro-subtext').classList.add('animate-in');
 
     Promise.all(sectionPromises).then(() => {
-        const savedScrollY = parseInt(sessionStorage.getItem('scrollY'), 10);
-        if (!isNaN(savedScrollY)) {
-            window.scrollTo(0, savedScrollY);
-        }
-
-        onScroll();
-
         requestAnimationFrame(() => {
-            onScroll();
-            document.documentElement.classList.remove('pre-scroll-lock');
-            document.body.classList.remove('pre-scroll-lock');
+            const savedScrollY = parseInt(sessionStorage.getItem('scrollY'), 10);
+
+            setTimeout(() => {
+                if (!isNaN(savedScrollY)) {
+                    window.scrollTo({ top: savedScrollY, behavior: 'auto' });
+                }
+
+                requestAnimationFrame(() => {
+                    onScroll();
+                    document.documentElement.classList.remove('pre-scroll-lock');
+                    document.body.classList.remove('pre-scroll-lock');
+                });
+            }, 50);
         });
     });
 });
