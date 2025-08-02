@@ -185,8 +185,9 @@ header.condensed.top-nav {
     left: 0;
     width: 100vw;
     height: 100vh;
-    background: url('../assets/images/test.gif') no-repeat center center/cover;
+    object-fit: cover;
     z-index: -1;
+    pointer-events: none;
 }
 
 .home-bg::after {
@@ -195,7 +196,7 @@ header.condensed.top-nav {
     top: 0; left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0);
+    background: rgba(0, 0, 0, 0.2);
 }
 
 .intro {
@@ -284,7 +285,7 @@ header.condensed.top-nav {
 /* MAIN CONTENT */
 .main-content {
     padding-top: 60px; /* space for nav */
-    background: #294b5b;
+    background: #2c5565 /* #295267 */ /* 294b5b */;
     padding-left: 1.5rem;
     padding-right: 1.5rem;
     padding-bottom: 4rem;
