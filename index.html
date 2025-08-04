@@ -201,8 +201,8 @@
     <noscript>
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter&display=swap&text=LongNguyenComputerScistudpabhvmlAWGitkH">
     </noscript>
-    <script src="https://code.iconify.design/iconify-icon/1.0.8/iconify-icon.min.js" defer></script>
-    <script src="https://unpkg.com/lucide@latest" defer></script>
+    <script src="https://code.iconify.design/iconify-icon/1.0.8/iconify-icon.min.js"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
 </head>
 
 <body>
@@ -230,7 +230,11 @@
         <source src="assets/images/background.webm" type="video/webm">
     </video>
     <div class="intro">
-        <img src="assets/images/profile-pic.webp" alt="Your profile photo" class="profile-pic" loading="eager"/>
+        <img src="assets/images/profile-pic.webp"
+             alt="Your profile photo"
+             class="profile-pic" loading="eager"
+             fetchpriority="high"
+        />
         <h1 class="intro-heading">Long Nguyen</h1>
         <p class="intro-subtext">Computer Science student passionate about software development, algorithm design and AI.</p>
         <div class="social-links">
@@ -255,6 +259,7 @@
 <script>
     lucide.createIcons();
 </script>
+
 <script src="js/script.js"></script>
 </body>
 </html>
