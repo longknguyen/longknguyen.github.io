@@ -209,6 +209,10 @@
             const script = document.createElement('script');
             script.src = url;
             script.onload = callback;
+            script.onerror = function() {
+                console.warn('Failed to load script:', url);
+                callback();
+            };
             document.head.appendChild(script);
         }
         
@@ -218,12 +222,46 @@
         };
         
         function initIcons() {
-            if (iconLibsLoaded.iconify && iconLibsLoaded.lucide) {
+            if (iconLibsLoaded.lucide) {
                 lucide.createIcons();
-                
+            }
+            
+            if ((iconLibsLoaded.iconify && iconLibsLoaded.lucide) || iconLibsLoaded.lucide) {
                 document.dispatchEvent(new Event('iconLibsReady'));
             }
         }
+        
+        setTimeout(function() {
+            if (typeof lucide !== 'undefined' && lucide.createIcons) {
+                try {
+                    lucide.createIcons({
+                        icons: {
+                            github: true,
+                            linkedin: true,
+                            home: true,
+                            folder: true,
+                            cpu: true,
+                            'book-open': true,
+                            mail: true,
+                            menu: true
+                        }
+                    });
+                } catch (e) {
+                    console.warn('Error creating critical icons:', e);
+                }
+                
+                try {
+                    lucide.createIcons();
+                } catch (e) {
+                    console.warn('Error creating all icons:', e);
+                }
+                
+                if (!iconLibsLoaded.lucide) {
+                    iconLibsLoaded.lucide = true;
+                    document.dispatchEvent(new Event('iconLibsReady'));
+                }
+            }
+        }, 1000);
         
         loadScript('https://code.iconify.design/iconify-icon/1.0.8/iconify-icon.min.js', function() {
             iconLibsLoaded.iconify = true;

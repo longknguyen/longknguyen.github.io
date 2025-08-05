@@ -69,13 +69,21 @@ navLinks.forEach(link => {
     link.addEventListener('click', function (e) {
         e.preventDefault();
 
+        document.documentElement.classList.remove('pre-scroll-lock');
+        document.body.classList.remove('pre-scroll-lock');
+
         const targetId = this.getAttribute('href');
         const target = document.querySelector(targetId);
 
         if (target) {
-            target.scrollIntoView({
-                behavior: 'smooth'
-            });
+            setTimeout(() => {
+                target.scrollIntoView({
+                    behavior: 'smooth'
+                });
+                
+                navLinks.forEach(l => l.classList.remove('active'));
+                this.classList.add('active');
+            }, 10);
         }
     });
 });
@@ -125,7 +133,32 @@ function setupSkillsObserver(container) {
 
 function safeCreateIcons() {
     if (typeof lucide !== 'undefined' && lucide.createIcons) {
-        lucide.createIcons();
+        try {
+            const criticalIcons = document.querySelectorAll('.nav-link i, .social-button i');
+            if (criticalIcons.length > 0) {
+                lucide.createIcons({
+                    icons: {
+                        github: true,
+                        linkedin: true,
+                        home: true,
+                        folder: true,
+                        cpu: true,
+                        'book-open': true,
+                        mail: true,
+                        menu: true
+                    }
+                });
+            }
+            
+            lucide.createIcons();
+        } catch (e) {
+            console.warn('Error creating icons:', e);
+            try {
+                lucide.createIcons();
+            } catch (e) {
+                console.error('Failed to create icons:', e);
+            }
+        }
     }
 }
 
@@ -263,11 +296,20 @@ document.addEventListener('iconLibsReady', () => {
 
 window.addEventListener('load', () => {
     pageLoaded = true;
+    
+    requestAnimationFrame(() => {
+        document.documentElement.classList.remove('pre-scroll-lock');
+        document.body.classList.remove('pre-scroll-lock');
+    });
+    
     if (iconLibsReady) {
         initPage();
     } else {
         document.querySelector('.profile-pic').classList.add('animate-in');
         document.querySelector('.top-nav').classList.add('animate-in');
+        document.querySelector('.social-links').classList.add('animate-in');
+        document.querySelector('.intro-heading').classList.add('animate-in');
+        document.querySelector('.intro-subtext').classList.add('animate-in');
     }
 });
 
