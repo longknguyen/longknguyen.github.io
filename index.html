@@ -201,8 +201,40 @@
     <noscript>
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter&display=swap&text=LongNguyenComputerScistudpabhvmlAWGitkH">
     </noscript>
-    <script src="https://code.iconify.design/iconify-icon/1.0.8/iconify-icon.min.js"></script>
-    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="preload" href="https://code.iconify.design/iconify-icon/1.0.8/iconify-icon.min.js" as="script">
+    <link rel="preload" href="https://unpkg.com/lucide@0.294.0/dist/umd/lucide.min.js" as="script">
+    
+    <script>
+        function loadScript(url, callback) {
+            const script = document.createElement('script');
+            script.src = url;
+            script.onload = callback;
+            document.head.appendChild(script);
+        }
+        
+        const iconLibsLoaded = {
+            iconify: false,
+            lucide: false
+        };
+        
+        function initIcons() {
+            if (iconLibsLoaded.iconify && iconLibsLoaded.lucide) {
+                lucide.createIcons();
+                
+                document.dispatchEvent(new Event('iconLibsReady'));
+            }
+        }
+        
+        loadScript('https://code.iconify.design/iconify-icon/1.0.8/iconify-icon.min.js', function() {
+            iconLibsLoaded.iconify = true;
+            initIcons();
+        });
+        
+        loadScript('https://unpkg.com/lucide@0.294.0/dist/umd/lucide.min.js', function() {
+            iconLibsLoaded.lucide = true;
+            initIcons();
+        });
+    </script>
 </head>
 
 <body>
@@ -256,10 +288,7 @@
     <div id="contact-container"></div>
 </main>
 
-<script>
-    lucide.createIcons();
-</script>
-
 <script src="js/script.js"></script>
+
 </body>
 </html>

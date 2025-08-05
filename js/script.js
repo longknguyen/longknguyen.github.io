@@ -123,13 +123,19 @@ function setupSkillsObserver(container) {
     categories.forEach(category => categoryObserver.observe(category));
 }
 
+function safeCreateIcons() {
+    if (typeof lucide !== 'undefined' && lucide.createIcons) {
+        lucide.createIcons();
+    }
+}
+
 function loadSection(containerId, file) {
     return fetch(file)
         .then(response => response.text())
         .then(html => {
             const container = document.getElementById(containerId);
             container.innerHTML = html;
-            lucide.createIcons();
+            safeCreateIcons();
 
             document.querySelectorAll(`#${containerId} .glass, #${containerId} .dark-glass`).forEach(card => {
                 observer.observe(card);
@@ -144,7 +150,7 @@ function loadSection(containerId, file) {
                 if (contactForm) {
                     contactForm.addEventListener('submit', async (e) => {
                         e.preventDefault();
-                        lucide.createIcons();
+                        safeCreateIcons();
 
                         const sendLabel = contactForm.querySelector('.send-label');
                         const dots = contactForm.querySelector('.sending-dots');
@@ -188,7 +194,7 @@ function loadSection(containerId, file) {
                         setTimeout(() => {
                             sendButton.classList.add('explode');
                             sendButton.innerHTML = `<i data-lucide="${resultIcon}"></i> ${resultText}`;
-                            lucide.createIcons();
+                            safeCreateIcons();
                         }, 300);
 
                         // Step 4: Reset form after another delay
@@ -203,7 +209,7 @@ function loadSection(containerId, file) {
                                 <span class="dot">.</span>
                             </span>
                             `;
-                            lucide.createIcons();
+                            safeCreateIcons();
                             contactForm.reset();
                         }, 2500);
                     });
@@ -222,7 +228,7 @@ const sectionPromises = [
 ];
 
 
-window.addEventListener('load', () => {
+function initPage() {
     document.querySelector('.profile-pic').classList.add('animate-in');
     document.querySelector('.top-nav').classList.add('animate-in');
     document.querySelector('.social-links').classList.add('animate-in');
@@ -240,7 +246,29 @@ window.addEventListener('load', () => {
             document.documentElement.classList.remove('pre-scroll-lock');
             document.body.classList.remove('pre-scroll-lock');
         });
+        
+        safeCreateIcons();
     });
+}
+
+let iconLibsReady = false;
+let pageLoaded = false;
+
+document.addEventListener('iconLibsReady', () => {
+    iconLibsReady = true;
+    if (pageLoaded) {
+        initPage();
+    }
+});
+
+window.addEventListener('load', () => {
+    pageLoaded = true;
+    if (iconLibsReady) {
+        initPage();
+    } else {
+        document.querySelector('.profile-pic').classList.add('animate-in');
+        document.querySelector('.top-nav').classList.add('animate-in');
+    }
 });
 
 window.addEventListener('beforeunload', () => {
