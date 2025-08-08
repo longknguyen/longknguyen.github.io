@@ -222,6 +222,10 @@ header.condensed.top-nav {
     transition: transform 0.6s ease-out, opacity 0.6s ease-out;
 }
 
+.intro-heading {
+    font-size: 1.5em;
+}
+
 .intro-heading.animate-in,
 .intro-subtext.animate-in {
     opacity: 1;
@@ -234,7 +238,6 @@ header.condensed.top-nav {
     gap: 1rem;
     justify-content: center;
 
-    /*animations*/
     transform: translateY(50px);
     opacity: 0;
     transition: transform 0.6s ease-out, opacity 0.6s ease-out;
