@@ -223,7 +223,11 @@
         
         function initIcons() {
             if (iconLibsLoaded.lucide) {
-                lucide.createIcons();
+                lucide.createIcons({
+                    attrs: {
+                        class: "lucide"
+                    }
+                });
             }
             
             if ((iconLibsLoaded.iconify && iconLibsLoaded.lucide) || iconLibsLoaded.lucide) {
@@ -235,15 +239,8 @@
             if (typeof lucide !== 'undefined' && lucide.createIcons) {
                 try {
                     lucide.createIcons({
-                        icons: {
-                            github: true,
-                            linkedin: true,
-                            home: true,
-                            folder: true,
-                            cpu: true,
-                            'book-open': true,
-                            mail: true,
-                            menu: true
+                        attrs: {
+                            class: "lucide"
                         }
                     });
                 } catch (e) {
@@ -295,7 +292,7 @@
 
 <!--Home-->
 <section id="home" class="home-section">
-    <video class="home-bg" autoplay muted loop playsinline poster="assets/images/fallback.webp">
+    <video class="home-bg inlinevideo" autoplay muted loop playsinline poster="assets/images/fallback.webp">
         <source src="assets/images/background.mp4" type="video/mp4">
         <source src="assets/images/background.webm" type="video/webm">
     </video>
@@ -327,6 +324,19 @@
 </main>
 
 <script src="js/script.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $('body').on('click touchstart', function () {
+            var video = document.querySelector('.inlinevideo');
 
+            if (video && video.paused) {
+                video.play().catch(function (err) {
+                    console.warn('Video play failed:', err);
+                });
+            }
+        });
+    });
+</script>
 </body>
 </html>

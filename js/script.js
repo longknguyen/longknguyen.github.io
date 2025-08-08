@@ -134,23 +134,12 @@ function setupSkillsObserver(container) {
 function safeCreateIcons() {
     if (typeof lucide !== 'undefined' && lucide.createIcons) {
         try {
-            const criticalIcons = document.querySelectorAll('.nav-link i, .social-button i');
-            if (criticalIcons.length > 0) {
-                lucide.createIcons({
-                    icons: {
-                        github: true,
-                        linkedin: true,
-                        home: true,
-                        folder: true,
-                        cpu: true,
-                        'book-open': true,
-                        mail: true,
-                        menu: true
-                    }
-                });
-            }
-            
-            lucide.createIcons();
+            // Use the proper way to register icons
+            lucide.createIcons({
+                attrs: {
+                    class: "lucide"
+                }
+            });
         } catch (e) {
             console.warn('Error creating icons:', e);
             try {
