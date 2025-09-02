@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="Portfolio of Long Nguyen, a Computer Science student passionate about software development, AI and algorithm design. Explore my projects and skills.">
-    <meta name="theme-color" content="#325267">
+    <meta name="theme-color" content="#295267">
 
     <meta property="og:title" content="Long Nguyen • Portfolio" />
     <meta property="og:description" content="Portfolio of Long Nguyen, a Computer Science student passionate about software development, AI and algorithm design. Explore my projects and skills." />
@@ -296,10 +296,7 @@
 
 <!--Home-->
 <section id="home" class="home-section">
-    <video class="home-bg inlinevideo" autoplay muted loop playsinline poster="assets/images/fallback.webp">
-        <source src="assets/images/background.mp4" type="video/mp4">
-        <source src="assets/images/background.webm" type="video/webm">
-    </video>
+    <img src="assets/images/background.gif" alt="Background" class="home-bg" />
     <div class="intro">
         <img src="assets/images/profile-pic.webp"
              alt="Your profile photo"
@@ -328,19 +325,5 @@
 </main>
 
 <script src="js/script.js"></script>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script>
-    $(document).ready(function () {
-        $('body').on('click touchstart', function () {
-            var video = document.querySelector('.inlinevideo');
-
-            if (video && video.paused) {
-                video.play().catch(function (err) {
-                    console.warn('Video play failed:', err);
-                });
-            }
-        });
-    });
-</script>
 </body>
 </html>
