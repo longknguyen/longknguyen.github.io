@@ -134,7 +134,6 @@ function setupSkillsObserver(container) {
 function safeCreateIcons() {
     if (typeof lucide !== 'undefined' && lucide.createIcons) {
         try {
-            // Use the proper way to register icons
             lucide.createIcons({
                 attrs: {
                     class: "lucide"

@@ -79,13 +79,6 @@ body {
     transition: opacity 0.3s ease, transform 0.3s ease;
 }
 
-
-@media (max-width: 400px) {
-    /*TODO:*/
-}
-
-
-/* When header is condensed (scroll down), show toggle and hide full nav */
 header.condensed .nav-full {
     display: none;
 }
@@ -477,7 +470,6 @@ header.condensed.top-nav {
     margin-right: 0;
 }
 
-/* GITHUB BUTTON */
 .github-button {
     align-self: flex-start;
     width: max-content;
@@ -513,24 +505,7 @@ header.condensed.top-nav {
     background: rgba(255, 255, 255, 0.25);
 }
 
-/* STACK ON SMALL SCREENS */
-@media (max-width: 768px) {
-    .project-card {
-        flex-direction: column;
-        align-items: center;
-        text-align: center;
-    }
 
-    .project-text {
-        text-align: center;
-        align-items: center;
-    }
-
-    .github-button {
-        margin-left: auto;
-        margin-right: auto;
-    }
-}
 
 
 /* SKILLS LIST */
@@ -618,7 +593,6 @@ header.condensed.top-nav {
 }
 
 
-/* HEADER COLLAPSE */
 header.collapsed {
     opacity: 0;
     pointer-events: none;
@@ -840,4 +814,27 @@ header.collapsed {
     .university-logo {
         width: 100px
     }
+}
+
+/* STACK ON SMALL SCREENS */
+@media (max-width: 768px) {
+    .project-card {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .project-text {
+        text-align: center;
+        align-items: center;
+    }
+
+    .github-button {
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
+
+@media (max-width: 400px) {
+    /*TODO:*/
 }
