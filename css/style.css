@@ -505,7 +505,12 @@ header.condensed.top-nav {
     background: rgba(255, 255, 255, 0.25);
 }
 
-
+#bookstore-slideshow {
+    display: block;
+    width: 100%;
+    height: auto;
+    transition: opacity 0.5s ease-in-out;
+}
 
 
 /* SKILLS LIST */

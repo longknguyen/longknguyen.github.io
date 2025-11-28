@@ -163,6 +163,28 @@ function loadSection(containerId, file) {
             });
 
             if (containerId === 'skills-container') {
+                const bookstoreImages = [
+                    "assets/images/bookstorebooks.webp",
+                    "assets/images/bookstorelogin.webp",
+                    "assets/images/bookstorehome.webp",
+                    "assets/images/bookstoreaddbook.webp"
+                ];
+
+                let currentIndex = 0;
+                const slideshowImage = document.getElementById("bookstore-slideshow");
+
+                if (slideshowImage) {
+                    setInterval(() => {
+                        slideshowImage.style.opacity = 0;
+
+                        setTimeout(() => {
+                            currentIndex = (currentIndex + 1) % bookstoreImages.length;
+                            slideshowImage.src = bookstoreImages[currentIndex];
+                            slideshowImage.style.opacity = 1;
+                        }, 500);
+                    }, 3000);
+
+                }
                 setupSkillsObserver(container);
             }
 
