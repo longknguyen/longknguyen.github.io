@@ -8,7 +8,7 @@ body.pre-scroll-lock {
 body {
     margin: 0;
     font-family: 'Roboto', sans-serif;
-    background: none; /* #ffffff; */
+    background-color: #295267;
     color: #fff;
     scroll-behavior: smooth;
     position: relative;
