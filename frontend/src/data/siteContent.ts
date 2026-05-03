@@ -122,6 +122,6 @@ export const heroContent = {
   eyebrow: 'Computer Science Student',
   title: "Long Nguyen",
   summary:
-    "I'm Long Nguyen, and I enjoy creating software that feels reliable, intentional, and easy to grow over time.",
+    "I'm Long Nguyen, and I enjoy creating software that feels reliable, intentional and easy to grow over time.",
   image: '/assets/images/profile/profile-pic.webp'
 };
