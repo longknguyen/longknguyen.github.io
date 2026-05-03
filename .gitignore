@@ -10,8 +10,10 @@
 
 # Dependency directories
 node_modules/
+.vite/
 
 # Build output
 dist/
 build/
 .gradle/
+src/main/resources/static/

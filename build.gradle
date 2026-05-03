@@ -1,3 +1,5 @@
+import org.gradle.internal.os.OperatingSystem
+
 plugins {
     id 'java'
     id 'application'
@@ -27,6 +29,17 @@ dependencies {
 application {
     mainClass = 'com.longnguyen.portfolio.Main'
 }
+
+def npmCommand = OperatingSystem.current().isWindows()
+        ? 'npm.cmd'
+        : (file('/opt/homebrew/bin/npm').exists() ? '/opt/homebrew/bin/npm' : 'npm')
+
+tasks.register('buildFrontend', Exec) {
+    workingDir file("$projectDir/frontend")
+    commandLine npmCommand, 'run', 'build'
+}
+
+processResources.dependsOn tasks.named('buildFrontend')
 
 test {
     useJUnitPlatform()

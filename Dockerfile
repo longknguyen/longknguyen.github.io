@@ -4,20 +4,22 @@ WORKDIR /app
 
 COPY . .
 
-RUN apt-get update && apt-get install -y findutils && rm -rf /var/lib/apt/lists/*
+RUN apt-get update && apt-get install -y curl findutils gnupg && rm -rf /var/lib/apt/lists/*
+
+RUN curl -fsSL https://deb.nodesource.com/setup_22.x | bash -
+RUN apt-get update && apt-get install -y nodejs && rm -rf /var/lib/apt/lists/*
 
 RUN chmod +x ./gradlew
 
-RUN ./gradlew clean build --no-daemon --stacktrace --info
+RUN npm --prefix frontend install
 
-# Debug: list files in build/libs to check JAR presence
-RUN ls -l build/libs
+RUN ./gradlew clean build --no-daemon --stacktrace --info
 
 FROM eclipse-temurin:21-jre
 
 WORKDIR /app
 
-COPY --from=build /app/build/libs/app-1.0.jar ./app.jar
+COPY --from=build /app/build/libs/*.jar ./app.jar
 
 EXPOSE 8080
 
