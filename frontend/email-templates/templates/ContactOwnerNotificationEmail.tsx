@@ -20,6 +20,8 @@ export const ContactOwnerNotificationEmail = ({
                 Someone reached out through your website. You can reply directly to this message and it will go back to the sender.
             </p>
 
+            <div style={emailBlockStyles.chip}>Replying to this email will reach the sender</div>
+
             <div style={emailBlockStyles.card}>
                 <p style={emailBlockStyles.label}>Sender</p>
                 <p style={emailBlockStyles.muted}>

@@ -27,19 +27,26 @@ export const ContactSenderConfirmationEmail = ({
                 <p style={emailBlockStyles.messageText} dangerouslySetInnerHTML={{__html: senderMessageHtml}}/>
             </div>
 
-            <ul style={emailBlockStyles.bulletList}>
-                <li>I will read your message and follow up as soon as I can.</li>
-                <li>If you need to add anything, you can reply to this email.</li>
-                <li>
-                    Direct contact:
-                    {' '}
-                    <a href={`mailto:${contactRecipientEmail}`} style={emailBlockStyles.emailLink}>
-                        {contactRecipientEmail}
-                    </a>
-                </li>
-            </ul>
+            <div style={emailBlockStyles.card}>
+                <p style={emailBlockStyles.label}>What happens next</p>
+                <ul style={emailBlockStyles.bulletList}>
+                    <li>I will read your message and follow up as soon as I can.</li>
+                    <li>If you need to add anything, you can reply to this email.</li>
+                    <li>
+                        Direct contact:
+                        {' '}
+                        <a href={`mailto:${contactRecipientEmail}`} style={emailBlockStyles.emailLink}>
+                            {contactRecipientEmail}
+                        </a>
+                    </li>
+                </ul>
+            </div>
 
-            <div style={emailBlockStyles.chip}>Confirmation sent successfully</div>
+            <div style={emailBlockStyles.chip}>
+                Confirmation sent to
+                {' '}
+                <span style={emailBlockStyles.emphasis}>{senderEmail}</span>
+            </div>
         </EmailLayout>
     );
 };

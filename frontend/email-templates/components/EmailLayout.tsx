@@ -9,14 +9,22 @@ type EmailLayoutProps = {
 };
 
 const colors = {
-    page: '#eff6ff',
-    card: '#ffffff',
-    border: '#dbeafe',
-    text: '#102847',
-    muted: '#476486',
-    accent: '#1d4ed8',
-    accentSoft: '#dbeafe',
-    band: '#0f2745'
+    page: '#071933',
+    pageHighlight: '#284a7a',
+    pageMid: '#102847',
+    pageEnd: '#050b16',
+    shell: '#0c1b32',
+    shellEdge: 'rgba(191, 219, 254, 0.18)',
+    shellInset: 'rgba(255, 255, 255, 0.08)',
+    text: '#f8fbff',
+    muted: 'rgba(219, 234, 254, 0.74)',
+    accent: '#8bc4ff',
+    accentStrong: '#4aa3ff',
+    accentSoft: 'rgba(74, 163, 255, 0.18)',
+    panel: 'rgba(255, 255, 255, 0.07)',
+    panelDeep: 'rgba(9, 20, 38, 0.78)',
+    panelGlow: 'rgba(255, 255, 255, 0.04)',
+    divider: 'rgba(191, 219, 254, 0.14)'
 };
 
 const styles = {
@@ -27,6 +35,7 @@ const styles = {
         margin: '0',
         padding: '32px 16px',
         backgroundColor: colors.page,
+        backgroundImage: `radial-gradient(circle at top, ${colors.pageHighlight} 0%, ${colors.pageMid} 34%, ${colors.page} 72%, ${colors.pageEnd} 100%)`,
         fontFamily: "'Segoe UI', Arial, sans-serif",
         color: colors.text
     },
@@ -42,22 +51,24 @@ const styles = {
         width: '100%',
         maxWidth: '640px',
         margin: '0 auto',
-        borderRadius: '28px',
+        borderRadius: '30px',
         overflow: 'hidden',
-        backgroundColor: colors.card,
-        border: `1px solid ${colors.border}`,
-        boxShadow: '0 22px 55px rgba(15, 39, 69, 0.12)'
+        backgroundColor: colors.shell,
+        backgroundImage: `linear-gradient(180deg, rgba(255,255,255,0.07) 0%, rgba(255,255,255,0.03) 18%, rgba(8,17,31,0.86) 100%)`,
+        border: `1px solid ${colors.shellEdge}`,
+        boxShadow: '0 30px 80px rgba(3, 9, 19, 0.45), inset 0 1px 0 rgba(255,255,255,0.06)'
     },
     band: {
-        padding: '28px 32px',
-        background: 'linear-gradient(135deg, #102847 0%, #1d4ed8 100%)'
+        padding: '30px 32px 26px',
+        background: 'linear-gradient(135deg, rgba(21,50,87,0.96) 0%, rgba(22,72,145,0.94) 58%, rgba(74,163,255,0.34) 100%)',
+        borderBottom: `1px solid ${colors.divider}`
     },
     eyebrow: {
         margin: '0',
         fontSize: '12px',
         letterSpacing: '0.22em',
         textTransform: 'uppercase' as const,
-        color: 'rgba(219, 234, 254, 0.84)'
+        color: 'rgba(219, 234, 254, 0.8)'
     },
     title: {
         margin: '14px 0 0',
@@ -67,7 +78,8 @@ const styles = {
         color: '#ffffff'
     },
     content: {
-        padding: '32px'
+        padding: '30px 32px',
+        background: 'linear-gradient(180deg, rgba(255,255,255,0.03) 0%, rgba(255,255,255,0.015) 100%)'
     },
     footer: {
         padding: '0 32px 28px',
@@ -77,7 +89,7 @@ const styles = {
     },
     footerDivider: {
         margin: '0 32px 24px',
-        borderTop: `1px solid ${colors.border}`
+        borderTop: `1px solid ${colors.divider}`
     }
 };
 
@@ -126,15 +138,18 @@ export const emailBlockStyles = {
         marginTop: '20px',
         padding: '20px 22px',
         borderRadius: '20px',
-        backgroundColor: '#f8fbff',
-        border: `1px solid ${colors.border}`
+        backgroundColor: colors.panel,
+        backgroundImage: `linear-gradient(180deg, ${colors.panelGlow} 0%, rgba(255,255,255,0.02) 100%)`,
+        border: `1px solid ${colors.shellEdge}`,
+        boxShadow: 'inset 0 1px 0 rgba(255,255,255,0.05)'
     },
     messageCard: {
         marginTop: '20px',
         padding: '22px',
         borderRadius: '22px',
-        background: 'linear-gradient(180deg, #f8fbff 0%, #eef5ff 100%)',
-        border: `1px solid ${colors.border}`
+        background: `linear-gradient(180deg, rgba(74,163,255,0.14) 0%, ${colors.panelDeep} 100%)`,
+        border: `1px solid ${colors.shellEdge}`,
+        boxShadow: 'inset 0 1px 0 rgba(255,255,255,0.06)'
     },
     messageText: {
         margin: '0',
@@ -160,8 +175,12 @@ export const emailBlockStyles = {
         padding: '8px 14px',
         borderRadius: '999px',
         backgroundColor: colors.accentSoft,
-        color: colors.band,
+        border: `1px solid ${colors.shellEdge}`,
+        color: colors.text,
         fontSize: '13px',
         fontWeight: '600'
+    },
+    emphasis: {
+        color: colors.accentStrong
     }
 };
