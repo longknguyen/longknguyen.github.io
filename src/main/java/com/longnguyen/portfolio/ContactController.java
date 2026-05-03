@@ -1,27 +1,21 @@
 package com.longnguyen.portfolio;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
+import com.longnguyen.portfolio.email.ContactEmailService;
+import com.longnguyen.portfolio.email.EmailDeliveryException;
 import org.springframework.http.ResponseEntity;
-import org.springframework.mail.SimpleMailMessage;
-import org.springframework.mail.javamail.JavaMailSender;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 
 @RestController
 @RequestMapping("/api/contact")
 public class ContactController {
-    private static final Logger logger = LoggerFactory.getLogger(ContactController.class);
+    private final ContactEmailService contactEmailService;
 
-    @Autowired
-    private JavaMailSender mailSender;
-
-    @Value("${spring.mail.username}")
-    private String senderAddress;
+    public ContactController(ContactEmailService contactEmailService) {
+        this.contactEmailService = contactEmailService;
+    }
 
     @PostMapping
     public ResponseEntity<String> handleContactForm(@RequestBody ContactForm form) {
@@ -30,21 +24,12 @@ public class ContactController {
             return ResponseEntity.badRequest().body("Email and message are required.");
         }
 
-        // Prepare email
-        SimpleMailMessage mailMessage = new SimpleMailMessage();
-        mailMessage.setFrom(senderAddress);
-        mailMessage.setReplyTo(form.getEmail());
-        mailMessage.setTo("wnc2zb@virginia.edu");  // receiving email
-        mailMessage.setSubject("New Contact Form Submission from " + form.getEmail());
-        mailMessage.setText(form.getMessage() + "\n\nFrom: " + form.getEmail());
-
         try {
-            mailSender.send(mailMessage);
-        } catch (Exception e) {
-            logger.error("Failed to send contact form email from {}", form.getEmail(), e);
-            return ResponseEntity.status(500).body("Failed to send email.");
+            contactEmailService.send(form);
+        } catch (EmailDeliveryException e) {
+            return ResponseEntity.status(500).body(e.getMessage());
         }
 
-        return ResponseEntity.ok("Message received. Thank you!");
+        return ResponseEntity.ok("Message sent successfully. A confirmation email is on its way.");
     }
 }

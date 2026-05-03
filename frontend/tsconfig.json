@@ -27,7 +27,8 @@
     }
   },
   "include": [
-    "src"
+    "src",
+    "email-templates"
   ],
   "references": [
     {
