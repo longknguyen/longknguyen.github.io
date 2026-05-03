@@ -43,6 +43,8 @@ jobs:
 
       - name: Build frontend
         working-directory: frontend
+        env:
+          VITE_CONTACT_API_URL: ${{ vars.VITE_CONTACT_API_URL }}
         run: npm run build
 
       - name: Upload Pages artifact

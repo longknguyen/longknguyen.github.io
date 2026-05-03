@@ -13,6 +13,9 @@ const initialState: FormState = {
     message: ''
 };
 
+const contactApiBaseUrl = import.meta.env.VITE_CONTACT_API_URL?.replace(/\/$/, '') ?? '';
+const contactApiEndpoint = `${contactApiBaseUrl}/api/contact`;
+
 export const ContactSection = () => {
     const [formState, setFormState] = useState<FormState>(initialState);
     const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
@@ -25,7 +28,7 @@ export const ContactSection = () => {
         setStatusMessage('Sending your message...');
 
         try {
-            const response = await fetch('/api/contact', {
+            const response = await fetch(contactApiEndpoint, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'

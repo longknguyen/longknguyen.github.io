@@ -197,8 +197,9 @@ const App = () => {
     };
 
     return (
-        <div
-            className="relative flex h-screen flex-col overflow-hidden bg-[radial-gradient(circle_at_top,#284a7a_0%,#102847_34%,#071220_72%,#050b16_100%)] text-slate-50">
+        <div className="app-frame">
+            <div
+                className="app-shell relative flex h-screen flex-col overflow-hidden bg-[radial-gradient(circle_at_top,#284a7a_0%,#102847_34%,#071220_72%,#050b16_100%)] text-slate-50">
             <div className="pointer-events-none absolute inset-0">
                 <div
                     className="ambient-orb left-[8%] top-24 h-64 w-64"
@@ -265,6 +266,7 @@ const App = () => {
                     </div>
                 </div>
             </main>
+            </div>
         </div>
     );
 };

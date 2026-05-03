@@ -25,6 +25,24 @@ body {
     height: 100vh;
 }
 
+:root {
+    --app-scale: 1;
+    --desktop-app-scale: 0.85;
+}
+
+.app-frame {
+    height: 100vh;
+    overflow: hidden;
+    background: radial-gradient(circle at top, #284a7a 0%, #102847 34%, #071220 72%, #050b16 100%);
+}
+
+.app-shell {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    transform-origin: top center;
+}
+
 ::selection {
     background: rgba(74, 163, 255, 0.35);
     color: white;
@@ -327,5 +345,18 @@ body {
     .page-layer-exit-down,
     .page-nav-enter {
         animation: none;
+    }
+}
+
+@media (min-width: 960px) {
+    :root {
+        --app-scale: var(--desktop-app-scale);
+    }
+
+    .app-shell {
+        left: 50%;
+        width: calc(100% / var(--app-scale));
+        height: calc(100% / var(--app-scale));
+        transform: translateX(-50%) scale(var(--app-scale));
     }
 }
