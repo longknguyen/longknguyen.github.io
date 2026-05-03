@@ -1,5 +1,5 @@
-import { ProjectsSection } from '@/components/sections/ProjectsSection';
+import {ProjectsSection} from '@/components/sections/ProjectsSection';
 
 export const ProjectsPage = () => {
-  return <ProjectsSection />;
+    return <ProjectsSection/>;
 };

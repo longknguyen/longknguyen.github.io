@@ -1,5 +1,5 @@
-import { SkillsSection } from '@/components/sections/SkillsSection';
+import {SkillsSection} from '@/components/sections/SkillsSection';
 
 export const SkillsPage = () => {
-  return <SkillsSection />;
+    return <SkillsSection/>;
 };
