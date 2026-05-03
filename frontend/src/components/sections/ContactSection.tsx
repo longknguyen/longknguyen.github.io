@@ -58,8 +58,7 @@ export const ContactSection = () => {
                             <p className="text-sm uppercase tracking-[0.3em] text-blue-100/68">Direct contact</p>
                             <h3 className="mt-3 text-2xl font-semibold text-white">wnc2zb@virginia.edu</h3>
                             <p className="mt-4 text-sm leading-7 text-blue-50/78">
-                                I’m interested in software engineering opportunities, collaborations, and projects where
-                                clean systems and good UX both matter.
+                                Contact me for any enquiries regarding opportunities, collaborations or projects.
                             </p>
                         </div>
 
