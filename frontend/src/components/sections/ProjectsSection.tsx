@@ -9,11 +9,16 @@ export const ProjectsSection = () => {
             title="Projects"
             icon={FolderKanban}
         >
-            <div className="grid items-start gap-5 lg:grid-cols-3">
+            <div className="grid gap-5 lg:grid-cols-3">
                 {projects.map((project, index) => (
-                    <Reveal key={project.title} direction={index % 2 === 0 ? 'up' : 'scale'} delay={160 + index * 110}>
-                        <article className="glass-panel flex flex-col overflow-hidden">
-                            <div className="relative overflow-hidden rounded-[1.5rem]">
+                    <Reveal
+                        key={project.title}
+                        className="h-full"
+                        direction={index % 2 === 0 ? 'up' : 'scale'}
+                        delay={160 + index * 110}
+                    >
+                        <article className="glass-panel flex h-full flex-col overflow-hidden">
+                            <div className="relative overflow-hidden rounded-t-[1.5rem]">
                                 <img
                                     src={project.image}
                                     alt={`${project.title} preview`}
@@ -23,7 +28,7 @@ export const ProjectsSection = () => {
                                     className="absolute inset-0 bg-[linear-gradient(180deg,transparent_35%,rgba(7,25,51,0.5)_100%)]"/>
                             </div>
 
-                            <div className="flex flex-col p-6">
+                            <div className="flex flex-1 flex-col p-6">
                                 <div className="flex flex-wrap gap-2">
                                     {project.tags.map((tag) => (
                                         <span key={tag}
@@ -40,7 +45,7 @@ export const ProjectsSection = () => {
                                     href={project.href}
                                     target="_blank"
                                     rel="noreferrer"
-                                    className="mt-6 inline-flex items-center gap-2 text-sm font-medium text-sky-100 transition hover:text-white"
+                                    className="mt-auto pt-6 inline-flex items-center gap-2 text-sm font-medium text-sky-100 transition hover:text-white"
                                 >
                                     View repository
                                     <ExternalLink className="h-4 w-4"/>

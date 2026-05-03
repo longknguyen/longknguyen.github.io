@@ -63,28 +63,28 @@ export const socialLinks: SocialLink[] = [
 
 export const projects: Project[] = [
     {
-        title: 'Flappy Bird',
+        title: 'Shared Recipe Book',
         description:
-            'A Java arcade game focused on responsive controls, polished collision behavior, and score-driven replayability.',
+            'A full-stack recipe platform with authentication, collections, reviews, and recipe management built with React, Tailwind CSS, Java and SQL.',
         href: 'https://github.com/longknguyen/flappy-bird',
-        image: '/assets/images/projects/flappy-bird/flappy-preview.webp',
-        tags: ['Java', 'Game Development', 'OOP']
+        image: '/assets/images/projects/shared-recipe-book/full-preview.webp',
+        tags: ['React', 'Tailwind', 'SQL', 'Spring Boot']
     },
     {
         title: 'Online Bookstore',
         description:
-            'A database-backed bookstore built with separate customer and admin flows, persistent book management, and JDBC-powered storage.',
+            'A database-backed bookstore built with separate customer and admin flows, book management and 3NF schemas.',
         href: 'https://github.com/longknguyen/online-book-store',
-        image: '/assets/images/projects/bookstore/bookstorehome.webp',
-        tags: ['Java', 'JDBC', 'HTML', 'CSS']
+        image: '/assets/images/projects/bookstore/bookstoreindex.webp',
+        tags: ['Java','Spring Boot', 'HTML', 'CSS']
     },
     {
         title: 'Personal Website',
         description:
-            'A portfolio rebuilt to be more maintainable with typed components, reusable sections, and a polished frontend architecture.',
+            'A portfolio rebuilt to be more maintainable with typed components, reusable sections and a restructured frontend architecture.',
         href: 'https://github.com/longknguyen/longknguyen.github.io',
         image: '/assets/images/projects/portfolio/personal-web-prev.webp',
-        tags: ['React', 'TypeScript', 'Tailwind', 'Spring Boot']
+        tags: ['React', 'TypeScript', 'Tailwind ', 'Spring Boot']
     }
 ];
 
@@ -92,7 +92,7 @@ export const skillGroups: SkillGroup[] = [
     {
         title: 'Backend',
         icon: Code2,
-        items: ['Java', 'Python', 'C', 'SQL', 'Spring Boot']
+        items: ['Java', 'SQL', 'Spring Boot', 'Python', 'C']
     },
     {
         title: 'Frontend',
