@@ -39,16 +39,22 @@ export const ContactSection = () => {
                 body: JSON.stringify(formState)
             });
 
+            const responseMessage = (await response.text()).trim();
+
             if (!response.ok) {
-                throw new Error('Request failed');
+                throw new Error(responseMessage || 'Request failed');
             }
 
             setFormState(initialState);
             setStatus('success');
-            setStatusMessage('Message sent successfully. Thanks for reaching out.');
+            setStatusMessage(responseMessage || 'Message sent successfully. Thanks for reaching out.');
         } catch (error) {
             setStatus('error');
-            setStatusMessage('Something went wrong while sending the message. Please try again.');
+            setStatusMessage(
+                error instanceof Error && error.message
+                    ? error.message
+                    : 'Something went wrong while sending the message. Please try again.'
+            );
         }
     };
 
