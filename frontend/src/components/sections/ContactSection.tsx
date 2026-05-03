@@ -13,7 +13,10 @@ const initialState: FormState = {
     message: ''
 };
 
-const contactApiBaseUrl = import.meta.env.VITE_CONTACT_API_URL?.replace(/\/$/, '') ?? '';
+const configuredContactApiBaseUrl = import.meta.env.VITE_CONTACT_API_URL?.trim().replace(/\/$/, '') ?? '';
+const isLocalPreview = typeof window !== 'undefined' && ['localhost', '127.0.0.1'].includes(window.location.hostname);
+const defaultProductionContactApiBaseUrl = 'https://czerny1728-github-io.onrender.com';
+const contactApiBaseUrl = configuredContactApiBaseUrl || (isLocalPreview ? '' : defaultProductionContactApiBaseUrl);
 const contactApiEndpoint = `${contactApiBaseUrl}/api/contact`;
 
 export const ContactSection = () => {
