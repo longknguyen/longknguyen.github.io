@@ -84,6 +84,17 @@ body {
 .page-layer {
   position: absolute;
   inset: 0;
+  z-index: 1;
+}
+
+.page-layer-previous {
+  z-index: 2;
+}
+
+.page-layer-previous [data-reveal] {
+  animation: none !important;
+  opacity: 1;
+  transform: none;
 }
 
 .page-shell-center {
@@ -146,9 +157,27 @@ body {
 }
 
 [data-reveal] {
-  opacity: 1;
-  filter: none;
-  transform: none;
+  animation-duration: 560ms;
+  animation-fill-mode: both;
+  animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+  animation-delay: var(--reveal-delay, 0ms);
+  will-change: opacity, transform;
+}
+
+[data-reveal="up"] {
+  animation-name: reveal-up;
+}
+
+[data-reveal="left"] {
+  animation-name: reveal-left;
+}
+
+[data-reveal="right"] {
+  animation-name: reveal-right;
+}
+
+[data-reveal="scale"] {
+  animation-name: reveal-scale;
 }
 
 @keyframes drift {
@@ -158,6 +187,50 @@ body {
   }
   50% {
     transform: translate3d(0, -18px, 0) scale(1.05);
+  }
+}
+
+@keyframes reveal-up {
+  from {
+    opacity: 0;
+    transform: translateY(22px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes reveal-left {
+  from {
+    opacity: 0;
+    transform: translateX(-24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes reveal-right {
+  from {
+    opacity: 0;
+    transform: translateX(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes reveal-scale {
+  from {
+    opacity: 0;
+    transform: scale(0.94);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
   }
 }
 
@@ -240,7 +313,7 @@ body {
 
   .ambient-orb,
   [data-reveal] {
-    animation: none;
+    animation: none !important;
     transition: none;
     transform: none;
     opacity: 1;

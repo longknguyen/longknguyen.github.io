@@ -232,7 +232,7 @@ const App = () => {
             <div
               className={`page-layer ${
                 direction === 'forward' ? 'page-layer-exit-up' : 'page-layer-exit-down'
-              }`}
+              } page-layer-previous`}
             >
               <div className={previousContentFits ? 'page-shell page-shell-center' : 'page-shell page-shell-start'}>
                 {renderSection(previousSection)}
@@ -249,8 +249,8 @@ const App = () => {
                   ? 'page-layer-enter-up'
                   : 'page-layer-enter-down'
                 : 'page-layer-active'
-            }`}
-          >
+              }`}
+            >
             <div
               ref={scrollRegionRef}
               className={`page-scroll-region ${contentFits ? 'page-shell-center' : 'page-shell-start'}`}
