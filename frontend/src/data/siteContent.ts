@@ -68,7 +68,7 @@ export const projects: Project[] = [
             'A full-stack recipe platform with authentication, collections, reviews, and recipe management built with React, Tailwind CSS, Java and SQL.',
         href: 'https://github.com/longknguyen/shared-recipe-book',
         image: '/assets/images/projects/shared-recipe-book/full-preview.webp',
-        tags: ['React', 'Tailwind', 'SQL', 'Spring Boot']
+        tags: ['React', 'Tailwind', 'SQL', 'Java', 'Spring Boot']
     },
     {
         title: 'Campus Interest Organisation Hub',
