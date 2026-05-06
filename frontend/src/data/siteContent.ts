@@ -71,20 +71,20 @@ export const projects: Project[] = [
         tags: ['React', 'Tailwind', 'SQL', 'Spring Boot']
     },
     {
+        title: 'Campus Interest Organisation Hub',
+        description:
+            'A student organisation platform that helps users discover campus groups, manage memberships, and connect through real-time messaging and discussion spaces.',
+        href: 'https://github.com/longknguyen/clubstrate',
+        image: '/assets/images/projects/clubstrate/clubstrate-prev.webp',
+        tags: ['Python', 'Django', 'HTML ', 'CSS']
+    },
+    {
         title: 'Online Bookstore',
         description:
             'A database-backed bookstore built with separate customer and admin flows, book management and 3NF schemas.',
         href: 'https://github.com/longknguyen/online-book-store',
         image: '/assets/images/projects/bookstore/bookstoreindex.webp',
         tags: ['Java','Spring Boot', 'HTML', 'CSS']
-    },
-    {
-        title: 'Personal Website',
-        description:
-            'A portfolio rebuilt to be more maintainable with typed components, reusable sections and a restructured frontend architecture.',
-        href: 'https://github.com/longknguyen/longknguyen.github.io',
-        image: '/assets/images/projects/portfolio/personal-web-prev.webp',
-        tags: ['React', 'TypeScript', 'Tailwind ', 'Spring Boot']
     }
 ];
 
@@ -122,6 +122,6 @@ export const heroContent = {
     eyebrow: 'Computer Science Student',
     title: "Long Nguyen",
     summary:
-        "I'm Long Nguyen, and I enjoy creating software that feels reliable, intentional and easy to grow over time.",
+        "I'm Long Nguyen, and I enjoy creating software that feels intentional and easy to grow over time.",
     image: '/assets/images/profile/profile-pic.webp'
 };
