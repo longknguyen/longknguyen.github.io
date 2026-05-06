@@ -66,7 +66,7 @@ export const projects: Project[] = [
         title: 'Shared Recipe Book',
         description:
             'A full-stack recipe platform with authentication, collections, reviews, and recipe management built with React, Tailwind CSS, Java and SQL.',
-        href: 'https://github.com/longknguyen/flappy-bird',
+        href: 'https://github.com/longknguyen/shared-recipe-book',
         image: '/assets/images/projects/shared-recipe-book/full-preview.webp',
         tags: ['React', 'Tailwind', 'SQL', 'Spring Boot']
     },
