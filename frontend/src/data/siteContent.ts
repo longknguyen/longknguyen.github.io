@@ -76,7 +76,7 @@ export const projects: Project[] = [
             'A student organisation platform that helps users discover campus groups, manage memberships, and connect through real-time messaging and discussion spaces.',
         href: 'https://github.com/longknguyen/clubstrate',
         image: '/assets/images/projects/clubstrate/clubstrate-prev.webp',
-        tags: ['Python', 'Django', 'HTML ', 'CSS']
+        tags: ['HTML', 'JavaScript','CSS', 'Python', 'Django']
     },
     {
         title: 'Online Bookstore',
