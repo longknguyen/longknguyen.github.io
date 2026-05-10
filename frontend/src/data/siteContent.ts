@@ -1,14 +1,5 @@
-import {
-    BriefcaseBusiness,
-    Code2,
-    Github,
-    GraduationCap,
-    Layers3,
-    Linkedin,
-    Mail,
-    Wrench
-} from 'lucide-react';
 import type {LucideIcon} from 'lucide-react';
+import {BriefcaseBusiness, Code2, Github, Layers3, Linkedin, Mail, Wrench} from 'lucide-react';
 
 export type NavigationItem = {
     id: string;
@@ -63,20 +54,20 @@ export const socialLinks: SocialLink[] = [
 
 export const projects: Project[] = [
     {
-        title: 'Shared Recipe Book',
-        description:
-            'A full-stack recipe platform with authentication, collections, reviews, and recipe management built with React, Tailwind CSS, Java and SQL.',
-        href: 'https://github.com/longknguyen/shared-recipe-book',
-        image: '/assets/images/projects/shared-recipe-book/full-preview.webp',
-        tags: ['React', 'Tailwind', 'SQL', 'Java', 'Spring Boot']
-    },
-    {
-        title: 'Campus Interest Organisation Hub',
+        title: 'Campus Interest Hub',
         description:
             'A student organisation platform that helps users discover campus groups, manage memberships, and connect through real-time messaging and discussion spaces.',
         href: 'https://github.com/longknguyen/clubstrate',
         image: '/assets/images/projects/clubstrate/clubstrate-prev.webp',
-        tags: ['HTML', 'JavaScript','CSS', 'Python', 'Django']
+        tags: ['Python', 'Django', 'CSS', 'JavaScript', 'HTML']
+    },
+    {
+        title: 'Shared Recipe Book',
+        description:
+            'A collaborative digital cookbook where users can explore recipes, curate their own collections, post their own original dishes and engage with other cooks through reviews.',
+        href: 'https://github.com/longknguyen/shared-recipe-book',
+        image: '/assets/images/projects/shared-recipe-book/full-preview.webp',
+        tags: ['React', 'Tailwind', 'SQL', 'Java', 'Spring Boot']
     },
     {
         title: 'Online Bookstore',
@@ -84,7 +75,7 @@ export const projects: Project[] = [
             'A database-backed bookstore built with separate customer and admin flows, book management and 3NF schemas.',
         href: 'https://github.com/longknguyen/online-book-store',
         image: '/assets/images/projects/bookstore/bookstoreindex.webp',
-        tags: ['Java','Spring Boot', 'HTML', 'CSS']
+        tags: ['Java', 'Spring Boot', 'HTML', 'CSS']
     }
 ];
 
