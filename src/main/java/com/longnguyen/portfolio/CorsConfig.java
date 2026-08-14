@@ -15,6 +15,8 @@ public class CorsConfig {
                 registry.addMapping("/api/contact")
                         .allowedOrigins(
                                 "https://longuyen.co.uk",
+                                "https://www.longuyen.co.uk",
+                                "https://longknguyen.github.io",
                                 "http://localhost:5173",
                                 "http://127.0.0.1:5173"
                         )

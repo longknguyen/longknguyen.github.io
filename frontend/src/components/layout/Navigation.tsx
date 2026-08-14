@@ -94,7 +94,8 @@ export const Navigation = ({items, activeSection, theme, onToggleTheme, onNaviga
                         type="button"
                         className="mobile-menu-toggle inline-flex h-11 w-11 items-center justify-center rounded-full transition"
                         aria-expanded={isOpen}
-                        aria-label="Toggle navigation"
+                        aria-controls="mobile-navigation"
+                        aria-label={isOpen ? 'Close navigation' : 'Open navigation'}
                         onClick={() => setIsOpen((current) => !current)}
                     >
                         {isOpen ? <X className="h-4 w-4"/> : <Menu className="h-4 w-4"/>}
@@ -103,6 +104,9 @@ export const Navigation = ({items, activeSection, theme, onToggleTheme, onNaviga
             </div>
 
             <div
+                id="mobile-navigation"
+                aria-hidden={!isOpen}
+                inert={!isOpen}
                 className={`nav-mobile-panel mx-auto mt-2 max-w-4xl overflow-hidden rounded-[1.5rem] transition-all duration-300 md:hidden ${
                     isOpen ? 'max-h-96 opacity-100' : 'pointer-events-none max-h-0 opacity-0'
                 }`}

@@ -13,6 +13,12 @@ const initialState: FormState = {
     message: ''
 };
 
+const MAX_EMAIL_LENGTH = 254;
+const MAX_MESSAGE_LENGTH = 5000;
+const GENERIC_ERROR_MESSAGE = 'Something went wrong while sending the message. Please try again.';
+
+class ContactRequestError extends Error {}
+
 const configuredContactApiBaseUrl = import.meta.env.VITE_CONTACT_API_URL?.trim().replace(/\/$/, '') ?? '';
 const isLocalPreview = typeof window !== 'undefined' && ['localhost', '127.0.0.1'].includes(window.location.hostname);
 const defaultProductionContactApiBaseUrl = 'https://czerny1728-github-io.onrender.com';
@@ -33,12 +39,15 @@ export const ContactSection = () => {
             const response = await fetch(contactApiEndpoint, {
                 method: 'POST',
                 headers: {'Content-Type': 'application/json'},
-                body: JSON.stringify(formState)
+                body: JSON.stringify({
+                    email: formState.email.trim(),
+                    message: formState.message.trim()
+                })
             });
             const responseMessage = (await response.text()).trim();
 
             if (!response.ok) {
-                throw new Error(responseMessage || 'Request failed');
+                throw new ContactRequestError(responseMessage || GENERIC_ERROR_MESSAGE);
             }
 
             setFormState(initialState);
@@ -47,9 +56,9 @@ export const ContactSection = () => {
         } catch (error) {
             setStatus('error');
             setStatusMessage(
-                error instanceof Error && error.message
+                error instanceof ContactRequestError
                     ? error.message
-                    : 'Something went wrong while sending the message. Please try again.'
+                    : GENERIC_ERROR_MESSAGE
             );
         }
     };
@@ -67,7 +76,12 @@ export const ContactSection = () => {
                             </p>
                         </div>
 
-                        <div className="status-panel mt-auto rounded-[1.25rem] p-5">
+                        <div
+                            className="status-panel mt-auto rounded-[1.25rem] p-5"
+                            role="status"
+                            aria-live="polite"
+                            aria-atomic="true"
+                        >
                             <p className="label-text text-xs font-semibold uppercase tracking-[0.22em]">Status</p>
                             <p className={`mt-3 text-sm leading-7 ${
                                 status === 'error' ? 'status-error' : status === 'success' ? 'status-success' : 'body-copy'
@@ -79,15 +93,21 @@ export const ContactSection = () => {
                 </Reveal>
 
                 <Reveal className="h-full" direction="up" delay={160}>
-                    <form className="contact-card flex h-full flex-col gap-4 p-7 sm:p-8" onSubmit={handleSubmit}>
+                    <form
+                        className="contact-card flex h-full flex-col gap-4 p-7 sm:p-8"
+                        aria-busy={status === 'loading'}
+                        onSubmit={handleSubmit}
+                    >
                         <label className="block">
                             <span className="heading-text mb-2 block text-sm font-semibold">Your email</span>
                             <input
                                 type="email"
                                 name="email"
+                                autoComplete="email"
                                 value={formState.email}
                                 onChange={(event) => setFormState((current) => ({...current, email: event.target.value}))}
                                 required
+                                maxLength={MAX_EMAIL_LENGTH}
                                 className="form-input"
                                 placeholder="you@example.com"
                             />
@@ -100,6 +120,7 @@ export const ContactSection = () => {
                                 value={formState.message}
                                 onChange={(event) => setFormState((current) => ({...current, message: event.target.value}))}
                                 required
+                                maxLength={MAX_MESSAGE_LENGTH}
                                 rows={6}
                                 className="form-input min-h-44 max-h-72 resize-none overflow-y-auto"
                                 placeholder="Tell me about the idea, role, or project you have in mind."

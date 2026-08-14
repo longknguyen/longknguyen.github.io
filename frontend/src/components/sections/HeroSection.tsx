@@ -17,6 +17,8 @@ export const HeroSection = ({onNavigate}: HeroSectionProps) => {
                         <img
                             src={heroContent.image}
                             alt="Long Nguyen"
+                            decoding="async"
+                            fetchPriority="high"
                             className="profile-image h-full w-full object-cover"
                         />
                     </div>
@@ -58,11 +60,11 @@ export const HeroSection = ({onNavigate}: HeroSectionProps) => {
                             <a
                                 key={label}
                                 href={href}
-                                target="_blank"
-                                rel="noreferrer"
+                                target={href.startsWith('http') ? '_blank' : undefined}
+                                rel={href.startsWith('http') ? 'noreferrer' : undefined}
                                 className="hero-social-link inline-flex items-center gap-2 rounded-full px-4 py-2.5 text-sm transition"
                             >
-                                <Icon className="h-4 w-4"/>
+                                <Icon className="h-4 w-4" aria-hidden="true"/>
                                 {label}
                             </a>
                         ))}

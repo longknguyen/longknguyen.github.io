@@ -8,7 +8,13 @@ export const EducationSection = () => {
             <Reveal direction="up" delay={100}>
                 <article className="education-card mx-auto grid max-w-4xl gap-7 p-7 sm:p-9 md:grid-cols-[150px_1fr] md:items-center">
                     <div className="education-logo mx-auto flex h-32 w-32 items-center justify-center rounded-[1.5rem] p-5">
-                        <img src={education.image} alt={education.school} className="max-h-full max-w-full object-contain"/>
+                        <img
+                            src={education.image}
+                            alt={education.school}
+                            loading="lazy"
+                            decoding="async"
+                            className="max-h-full max-w-full object-contain"
+                        />
                     </div>
 
                     <div className="text-center md:text-left">

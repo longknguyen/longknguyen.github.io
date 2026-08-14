@@ -14,6 +14,8 @@ export const ProjectsSection = () => {
                                 <img
                                     src={project.image}
                                     alt={`${project.title} preview`}
+                                    loading="lazy"
+                                    decoding="async"
                                     className="h-full min-h-64 w-full object-cover transition duration-700"
                                 />
                             </div>
@@ -37,7 +39,7 @@ export const ProjectsSection = () => {
                                     className="text-link mt-7 inline-flex w-fit items-center gap-2 text-sm font-semibold transition"
                                 >
                                     View repository
-                                    <ExternalLink className="h-4 w-4"/>
+                                    <ExternalLink className="h-4 w-4" aria-hidden="true"/>
                                 </a>
                             </div>
                         </article>

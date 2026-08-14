@@ -15,6 +15,9 @@ const scrollToSection = (sectionId: SectionId, behavior: ScrollBehavior) => {
     document.getElementById(sectionId)?.scrollIntoView({behavior, block: 'start'});
 };
 
+const getPreferredScrollBehavior = (): ScrollBehavior =>
+    window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth';
+
 export const useSectionNavigation = () => {
     const [activeSection, setActiveSection] = useState<SectionId>(getSectionFromHash);
 
@@ -25,8 +28,7 @@ export const useSectionNavigation = () => {
             window.history.pushState(null, '', `#${sectionId}`);
         }
 
-        const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-        scrollToSection(sectionId, prefersReducedMotion ? 'auto' : 'smooth');
+        scrollToSection(sectionId, getPreferredScrollBehavior());
     }, []);
 
     useEffect(() => {
@@ -57,19 +59,27 @@ export const useSectionNavigation = () => {
         const handlePopState = () => {
             const sectionId = getSectionFromHash();
             setActiveSection(sectionId);
-            scrollToSection(sectionId, 'smooth');
+            scrollToSection(sectionId, getPreferredScrollBehavior());
         };
+
+        const initialSection = getSectionFromHash();
 
         window.addEventListener('scroll', updateActiveSection, {passive: true});
         window.addEventListener('resize', updateActiveSection);
         window.addEventListener('popstate', handlePopState);
-        updateActiveSection();
+        window.addEventListener('hashchange', handlePopState);
+
+        animationFrame = window.requestAnimationFrame(() => {
+            scrollToSection(initialSection, 'auto');
+            updateActiveSection();
+        });
 
         return () => {
             window.cancelAnimationFrame(animationFrame);
             window.removeEventListener('scroll', updateActiveSection);
             window.removeEventListener('resize', updateActiveSection);
             window.removeEventListener('popstate', handlePopState);
+            window.removeEventListener('hashchange', handlePopState);
         };
     }, []);
 
