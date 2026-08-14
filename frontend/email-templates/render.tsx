@@ -8,7 +8,8 @@ const placeholderTokens = {
     contactRecipientEmail: '{{contactRecipientEmail}}'
 };
 
-const renderDocument = (markup: string) => `<!DOCTYPE html>${markup}`;
+const generatedNotice = '<!-- Generated from frontend/email-templates. Do not edit directly. -->';
+const renderDocument = (markup: string) => `<!DOCTYPE html>${generatedNotice}${markup}`;
 
 export const renderEmailTemplates = () => ({
     'owner-notification.html': renderDocument(

@@ -1,54 +1,45 @@
-import {ExternalLink, FolderKanban} from 'lucide-react';
+import {ExternalLink} from 'lucide-react';
 import {Reveal} from '@/components/ui/Reveal';
 import {SectionShell} from '@/components/ui/SectionShell';
 import {projects} from '@/data/siteContent';
 
 export const ProjectsSection = () => {
     return (
-        <SectionShell
-            title="Projects"
-            icon={FolderKanban}
-        >
-            <div className="grid gap-5 lg:grid-cols-3">
+        <SectionShell id="projects" title="Projects">
+            <div className="space-y-7 sm:space-y-9">
                 {projects.map((project, index) => (
-                    <Reveal
-                        key={project.title}
-                        className="h-full"
-                        direction={index % 2 === 0 ? 'up' : 'scale'}
-                        delay={160 + index * 110}
-                    >
-                        <article className="glass-panel flex h-full flex-col overflow-hidden">
-                            <div className="relative overflow-hidden rounded-t-[1.5rem]">
+                    <Reveal key={project.title} direction="up" delay={80 + index * 70}>
+                        <article className="project-card grid overflow-hidden lg:grid-cols-2">
+                            <div className={`project-media min-h-64 overflow-hidden ${index % 2 === 0 ? 'lg:order-2' : 'lg:order-1'}`}>
                                 <img
                                     src={project.image}
                                     alt={`${project.title} preview`}
-                                    className="h-56 w-full object-cover transition duration-700 hover:scale-105"
+                                    loading="lazy"
+                                    decoding="async"
+                                    className="h-full min-h-64 w-full object-cover transition duration-700"
                                 />
-                                <div
-                                    className="absolute inset-0 bg-[linear-gradient(180deg,transparent_35%,rgba(7,25,51,0.5)_100%)]"/>
                             </div>
 
-                            <div className="flex flex-1 flex-col p-6">
+                            <div className={`flex flex-col justify-center p-7 sm:p-9 lg:p-11 ${index % 2 === 0 ? 'lg:order-1' : 'lg:order-2'}`}>
                                 <div className="flex flex-wrap gap-2">
                                     {project.tags.map((tag) => (
-                                        <span key={tag}
-                                              className="rounded-full border border-white/16 bg-white/10 px-3 py-1 text-xs uppercase tracking-[0.16em] text-blue-50/80">
-                      {tag}
-                    </span>
+                                        <span key={tag} className="tag-pill rounded-full px-3 py-1.5 text-xs font-medium">
+                                            {tag}
+                                        </span>
                                     ))}
                                 </div>
 
-                                <h3 className="mt-5 text-2xl font-semibold text-white">{project.title}</h3>
-                                <p className="mt-3 text-sm leading-7 text-blue-50/78">{project.description}</p>
+                                <h3 className="heading-text mt-6 text-2xl font-bold sm:text-3xl">{project.title}</h3>
+                                <p className="body-copy mt-4 text-sm leading-7 sm:text-base">{project.description}</p>
 
                                 <a
                                     href={project.href}
                                     target="_blank"
                                     rel="noreferrer"
-                                    className="mt-auto pt-6 inline-flex items-center gap-2 text-sm font-medium text-sky-100 transition hover:text-white"
+                                    className="text-link mt-7 inline-flex w-fit items-center gap-2 text-sm font-semibold transition"
                                 >
                                     View repository
-                                    <ExternalLink className="h-4 w-4"/>
+                                    <ExternalLink className="h-4 w-4" aria-hidden="true"/>
                                 </a>
                             </div>
                         </article>

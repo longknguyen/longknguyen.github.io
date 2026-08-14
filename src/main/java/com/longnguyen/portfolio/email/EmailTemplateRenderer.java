@@ -4,6 +4,7 @@ import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -26,8 +27,8 @@ public class EmailTemplateRenderer {
     private String loadTemplate(String templateName) {
         ClassPathResource resource = new ClassPathResource("email-templates/" + templateName);
 
-        try {
-            return new String(resource.getInputStream().readAllBytes(), StandardCharsets.UTF_8);
+        try (InputStream inputStream = resource.getInputStream()) {
+            return new String(inputStream.readAllBytes(), StandardCharsets.UTF_8);
         } catch (IOException e) {
             throw new IllegalStateException("Could not load email template: " + templateName, e);
         }

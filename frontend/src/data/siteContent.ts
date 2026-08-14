@@ -1,9 +1,12 @@
 import type {LucideIcon} from 'lucide-react';
-import {BriefcaseBusiness, Code2, Github, Layers3, Linkedin, Mail, Wrench} from 'lucide-react';
+import {Code2, FolderKanban, Github, GraduationCap, Home, Linkedin, Mail} from 'lucide-react';
+
+export type SectionId = 'home' | 'projects' | 'skills' | 'education' | 'contact';
 
 export type NavigationItem = {
-    id: string;
+    id: SectionId;
     label: string;
+    icon: LucideIcon;
 };
 
 export type SocialLink = {
@@ -22,16 +25,15 @@ export type Project = {
 
 export type SkillGroup = {
     title: string;
-    icon: LucideIcon;
     items: string[];
 };
 
 export const navigationItems: NavigationItem[] = [
-    {id: 'home', label: 'Home'},
-    {id: 'projects', label: 'Projects'},
-    {id: 'skills', label: 'Skills'},
-    {id: 'education', label: 'Education'},
-    {id: 'contact', label: 'Contact'}
+    {id: 'home', label: 'Home', icon: Home},
+    {id: 'projects', label: 'Projects', icon: FolderKanban},
+    {id: 'skills', label: 'Skills', icon: Code2},
+    {id: 'education', label: 'Education', icon: GraduationCap},
+    {id: 'contact', label: 'Contact', icon: Mail}
 ];
 
 export const socialLinks: SocialLink[] = [
@@ -82,22 +84,18 @@ export const projects: Project[] = [
 export const skillGroups: SkillGroup[] = [
     {
         title: 'Backend',
-        icon: Code2,
-        items: ['Java', 'SQL', 'Spring Boot', 'Python', 'C']
+        items: ['Java', 'SQL', 'Spring Boot', 'Python']
     },
     {
         title: 'Frontend',
-        icon: Layers3,
-        items: ['React', 'TypeScript', 'Tailwind CSS', 'HTML5', 'CSS3', 'JavaScript']
+        items: ['React', 'Tailwind CSS', 'HTML5', 'CSS3', 'JavaScript']
     },
     {
         title: 'Practices',
-        icon: BriefcaseBusiness,
         items: ['Object-Oriented Programming', 'Data Structures', 'Unit Testing', 'TDD', 'Database Design']
     },
     {
         title: 'Tools',
-        icon: Wrench,
         items: ['Git', 'GitHub', 'Gradle', 'Docker']
     }
 ];
@@ -110,7 +108,6 @@ export const education = {
 };
 
 export const heroContent = {
-    eyebrow: 'Computer Science Student',
     title: "Long Nguyen",
     summary:
         "I'm Long Nguyen, and I enjoy creating software that feels intentional and easy to grow over time.",

@@ -24,7 +24,7 @@ export const ContactSenderConfirmationEmail = ({
 
             <div style={emailBlockStyles.messageCard}>
                 <p style={emailBlockStyles.label}>Your message</p>
-                <p style={emailBlockStyles.messageText} dangerouslySetInnerHTML={{__html: senderMessageHtml}}/>
+                <p style={emailBlockStyles.messageText}>{senderMessageHtml}</p>
             </div>
 
             <div style={emailBlockStyles.card}>

@@ -1,4 +1,4 @@
-import {Mail, SendHorizonal} from 'lucide-react';
+import {SendHorizonal} from 'lucide-react';
 import {useState, type FormEvent} from 'react';
 import {Reveal} from '@/components/ui/Reveal';
 import {SectionShell} from '@/components/ui/SectionShell';
@@ -13,6 +13,12 @@ const initialState: FormState = {
     message: ''
 };
 
+const MAX_EMAIL_LENGTH = 254;
+const MAX_MESSAGE_LENGTH = 5000;
+const GENERIC_ERROR_MESSAGE = 'Something went wrong while sending the message. Please try again.';
+
+class ContactRequestError extends Error {}
+
 const configuredContactApiBaseUrl = import.meta.env.VITE_CONTACT_API_URL?.trim().replace(/\/$/, '') ?? '';
 const isLocalPreview = typeof window !== 'undefined' && ['localhost', '127.0.0.1'].includes(window.location.hostname);
 const defaultProductionContactApiBaseUrl = 'https://czerny1728-github-io.onrender.com';
@@ -26,23 +32,22 @@ export const ContactSection = () => {
 
     const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault();
-
         setStatus('loading');
         setStatusMessage('Sending your message...');
 
         try {
             const response = await fetch(contactApiEndpoint, {
                 method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(formState)
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({
+                    email: formState.email.trim(),
+                    message: formState.message.trim()
+                })
             });
-
             const responseMessage = (await response.text()).trim();
 
             if (!response.ok) {
-                throw new Error(responseMessage || 'Request failed');
+                throw new ContactRequestError(responseMessage || GENERIC_ERROR_MESSAGE);
             }
 
             setFormState(initialState);
@@ -51,72 +56,73 @@ export const ContactSection = () => {
         } catch (error) {
             setStatus('error');
             setStatusMessage(
-                error instanceof Error && error.message
+                error instanceof ContactRequestError
                     ? error.message
-                    : 'Something went wrong while sending the message. Please try again.'
+                    : GENERIC_ERROR_MESSAGE
             );
         }
     };
 
     return (
-        <SectionShell
-            title="Contact"
-            icon={Mail}
-        >
-            <div className="grid gap-5 md:grid-cols-[0.85fr_1.15fr] md:items-stretch">
-                <Reveal className="h-full" direction="left" delay={160}>
-                    <div className="glass-panel flex h-full flex-col gap-8 p-6">
+        <SectionShell id="contact" title="Contact" className="pb-28 sm:pb-32">
+            <div className="grid gap-6 md:grid-cols-[0.85fr_1.15fr] md:items-stretch">
+                <Reveal className="h-full" direction="up" delay={90}>
+                    <div className="contact-card flex h-full flex-col gap-8 p-7 sm:p-8">
                         <div>
-                            <p className="text-sm uppercase tracking-[0.3em] text-blue-100/68">Direct contact</p>
-                            <h3 className="mt-3 text-2xl font-semibold text-white">wnc2zb@virginia.edu</h3>
-                            <p className="mt-4 text-sm leading-7 text-blue-50/78">
+                            <p className="label-text text-xs font-semibold uppercase tracking-[0.22em]">Direct contact</p>
+                            <h3 className="heading-text mt-3 break-all text-2xl font-bold">wnc2zb@virginia.edu</h3>
+                            <p className="body-copy mt-4 text-sm leading-7">
                                 Contact me for any enquiries regarding opportunities, collaborations or projects.
                             </p>
                         </div>
 
-                        <div className="mt-auto rounded-[1.5rem] border border-white/16 bg-white/10 p-5">
-                            <p className="text-xs uppercase tracking-[0.28em] text-blue-100/68">Status</p>
-                            <p
-                                className={`mt-3 text-sm leading-7 ${
-                                    status === 'error' ? 'text-rose-100' : status === 'success' ? 'text-emerald-100' : 'text-blue-50/78'
-                                }`}
-                            >
+                        <div
+                            className="status-panel mt-auto rounded-[1.25rem] p-5"
+                            role="status"
+                            aria-live="polite"
+                            aria-atomic="true"
+                        >
+                            <p className="label-text text-xs font-semibold uppercase tracking-[0.22em]">Status</p>
+                            <p className={`mt-3 text-sm leading-7 ${
+                                status === 'error' ? 'status-error' : status === 'success' ? 'status-success' : 'body-copy'
+                            }`}>
                                 {statusMessage}
                             </p>
                         </div>
                     </div>
                 </Reveal>
 
-                <Reveal className="h-full" direction="right" delay={260}>
-                    <form className="glass-panel flex h-full flex-col gap-4 p-6" onSubmit={handleSubmit}>
-                        <label className="block shrink-0">
-                            <span className="mb-2 block text-sm font-medium text-blue-50/82">Your email</span>
+                <Reveal className="h-full" direction="up" delay={160}>
+                    <form
+                        className="contact-card flex h-full flex-col gap-4 p-7 sm:p-8"
+                        aria-busy={status === 'loading'}
+                        onSubmit={handleSubmit}
+                    >
+                        <label className="block">
+                            <span className="heading-text mb-2 block text-sm font-semibold">Your email</span>
                             <input
                                 type="email"
                                 name="email"
+                                autoComplete="email"
                                 value={formState.email}
-                                onChange={(event) => setFormState((current) => ({
-                                    ...current,
-                                    email: event.target.value
-                                }))}
+                                onChange={(event) => setFormState((current) => ({...current, email: event.target.value}))}
                                 required
+                                maxLength={MAX_EMAIL_LENGTH}
                                 className="form-input"
                                 placeholder="you@example.com"
                             />
                         </label>
 
-                        <label className="flex min-h-0 flex-1 flex-col">
-                            <span className="mb-2 block text-sm font-medium text-blue-50/82">Your message</span>
+                        <label className="flex flex-1 flex-col">
+                            <span className="heading-text mb-2 block text-sm font-semibold">Your message</span>
                             <textarea
                                 name="message"
                                 value={formState.message}
-                                onChange={(event) => setFormState((current) => ({
-                                    ...current,
-                                    message: event.target.value
-                                }))}
+                                onChange={(event) => setFormState((current) => ({...current, message: event.target.value}))}
                                 required
+                                maxLength={MAX_MESSAGE_LENGTH}
                                 rows={6}
-                                className="form-input h-full min-h-40 max-h-72 resize-none overflow-y-auto"
+                                className="form-input min-h-44 max-h-72 resize-none overflow-y-auto"
                                 placeholder="Tell me about the idea, role, or project you have in mind."
                             />
                         </label>
@@ -124,7 +130,7 @@ export const ContactSection = () => {
                         <button
                             type="submit"
                             disabled={status === 'loading'}
-                            className="mt-auto inline-flex items-center gap-2 rounded-full border border-white/18 bg-white px-5 py-3 text-sm font-semibold text-blue-800 transition duration-300 hover:-translate-y-0.5 hover:bg-blue-50 disabled:cursor-not-allowed disabled:opacity-70"
+                            className="primary-button mt-auto inline-flex items-center justify-center gap-2 rounded-full px-5 py-3 text-sm font-semibold transition disabled:cursor-not-allowed disabled:opacity-70"
                         >
                             <SendHorizonal className={`h-4 w-4 ${status === 'loading' ? 'animate-pulse' : ''}`}/>
                             {status === 'loading' ? 'Sending...' : 'Send message'}

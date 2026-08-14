@@ -33,7 +33,7 @@ export const ContactOwnerNotificationEmail = ({
 
             <div style={emailBlockStyles.messageCard}>
                 <p style={emailBlockStyles.label}>Message</p>
-                <p style={emailBlockStyles.messageText} dangerouslySetInnerHTML={{__html: senderMessageHtml}}/>
+                <p style={emailBlockStyles.messageText}>{senderMessageHtml}</p>
             </div>
         </EmailLayout>
     );

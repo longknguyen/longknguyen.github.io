@@ -26,7 +26,7 @@ public class ResendContactEmailService implements ContactEmailService {
     private final ObjectMapper objectMapper;
     private final EmailTemplateRenderer templateRenderer;
     private final HttpClient httpClient;
-    private final String apiBaseUrl;
+    private final URI emailEndpoint;
     private final String apiKey;
     private final String toEmail;
     private final String fromEmail;
@@ -44,7 +44,8 @@ public class ResendContactEmailService implements ContactEmailService {
         this.httpClient = HttpClient.newBuilder()
                 .connectTimeout(Duration.ofSeconds(10))
                 .build();
-        this.apiBaseUrl = apiBaseUrl;
+        String normalizedApiBaseUrl = apiBaseUrl == null ? "" : apiBaseUrl.trim().replaceAll("/+$", "");
+        this.emailEndpoint = URI.create(normalizedApiBaseUrl + "/emails");
         this.apiKey = apiKey == null ? "" : apiKey.trim();
         this.toEmail = toEmail == null ? "" : toEmail.trim();
         this.fromEmail = fromEmail == null ? "" : fromEmail.trim();
@@ -128,7 +129,7 @@ public class ResendContactEmailService implements ContactEmailService {
     private void dispatch(SendEmailRequest payload) throws IOException, InterruptedException {
         String requestBody = objectMapper.writeValueAsString(payload);
 
-        HttpRequest request = HttpRequest.newBuilder(URI.create(apiBaseUrl + "/emails"))
+        HttpRequest request = HttpRequest.newBuilder(emailEndpoint)
                 .timeout(Duration.ofSeconds(15))
                 .header("Authorization", "Bearer " + apiKey)
                 .header("Content-Type", "application/json")

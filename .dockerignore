@@ -1,0 +1,11 @@
+.git
+.github
+.gradle
+.idea
+build
+frontend/.generated
+frontend/node_modules
+src/main/resources/static
+*.iml
+*.log
+.DS_Store
