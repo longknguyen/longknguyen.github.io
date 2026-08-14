@@ -108,7 +108,6 @@ export const education = {
 };
 
 export const heroContent = {
-    eyebrow: 'Computer Science Student',
     title: "Long Nguyen",
     summary:
         "I'm Long Nguyen, and I enjoy creating software that feels intentional and easy to grow over time.",
