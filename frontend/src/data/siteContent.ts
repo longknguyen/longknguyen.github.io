@@ -84,7 +84,7 @@ export const projects: Project[] = [
 export const skillGroups: SkillGroup[] = [
     {
         title: 'Backend',
-        items: ['Java', 'SQL', 'Spring Boot', 'Python', 'C']
+        items: ['Java', 'SQL', 'Spring Boot', 'Python']
     },
     {
         title: 'Frontend',
