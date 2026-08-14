@@ -6,11 +6,15 @@ type SectionHeadingProps = {
 
 export const SectionHeading = ({eyebrow, title, description}: SectionHeadingProps) => {
     return (
-        <div className="max-w-2xl" data-reveal="up">
-            {eyebrow ?
-                <p className="text-sm font-semibold uppercase tracking-[0.34em] text-blue-100/70">{eyebrow}</p> : null}
-            <h2 className={`${eyebrow ? 'mt-4' : ''} text-3xl font-semibold tracking-tight text-white sm:text-4xl`}>{title}</h2>
-            {description ? <p className="mt-4 text-base leading-8 text-blue-50/78">{description}</p> : null}
+        <div className="mx-auto max-w-2xl text-center">
+            {eyebrow ? (
+                <p className="section-eyebrow text-xs font-semibold uppercase tracking-[0.24em]">{eyebrow}</p>
+            ) : null}
+            <h2 className={`section-title text-3xl font-bold tracking-tight sm:text-4xl ${eyebrow ? 'mt-3' : ''}`}>
+                {title}
+            </h2>
+            {description ? <p className="section-description mt-3 text-base leading-7">{description}</p> : null}
+            <span className="section-heading-line mx-auto mt-5 block" aria-hidden="true"/>
         </div>
     );
 };
