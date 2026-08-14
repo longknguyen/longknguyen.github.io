@@ -62,14 +62,15 @@ export const Navigation = ({items, activeSection, theme, onToggleTheme, onNaviga
                                 title={isCompact && !isActive ? item.label : undefined}
                                 onClick={() => handleNavigate(item.id)}
                             >
-                                <Icon className="nav-link-icon h-4 w-4 shrink-0" aria-hidden="true"/>
+                                <Icon className="nav-link-icon shrink-0" aria-hidden="true"/>
                                 <span className="nav-link-label">{item.label}</span>
                             </button>
                         );
                     })}
+                    <span className="nav-theme-divider" aria-hidden="true"/>
                     <button
                         type="button"
-                        className="theme-toggle ml-1 inline-flex h-9 w-9 items-center justify-center rounded-full transition"
+                        className="theme-toggle inline-flex h-9 w-8 items-center justify-center transition"
                         aria-label={`Switch to ${theme === 'light' ? 'dark' : 'light'} mode`}
                         title={`Switch to ${theme === 'light' ? 'dark' : 'light'} mode`}
                         onClick={onToggleTheme}
@@ -80,7 +81,7 @@ export const Navigation = ({items, activeSection, theme, onToggleTheme, onNaviga
 
                 <button
                     type="button"
-                    className="theme-toggle inline-flex h-10 w-10 items-center justify-center rounded-full transition md:hidden"
+                    className="mobile-menu-toggle inline-flex h-10 w-10 items-center justify-center rounded-full transition md:hidden"
                     aria-expanded={isOpen}
                     aria-label="Toggle navigation"
                     onClick={() => setIsOpen((current) => !current)}
@@ -106,7 +107,7 @@ export const Navigation = ({items, activeSection, theme, onToggleTheme, onNaviga
                                 aria-current={activeSection === item.id ? 'page' : undefined}
                                 onClick={() => handleNavigate(item.id)}
                             >
-                                <Icon className="nav-link-icon h-4 w-4 shrink-0" aria-hidden="true"/>
+                                <Icon className="nav-link-icon shrink-0" aria-hidden="true"/>
                                 <span className="nav-link-label">{item.label}</span>
                             </button>
                         );
