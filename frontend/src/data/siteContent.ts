@@ -88,7 +88,7 @@ export const skillGroups: SkillGroup[] = [
     },
     {
         title: 'Frontend',
-        items: ['React', 'TypeScript', 'Tailwind CSS', 'HTML5', 'CSS3', 'JavaScript']
+        items: ['React', 'Tailwind CSS', 'HTML5', 'CSS3', 'JavaScript']
     },
     {
         title: 'Practices',

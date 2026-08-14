@@ -266,6 +266,13 @@ textarea:focus-visible {
         background: var(--border-strong);
     }
 
+    .mobile-theme-divider {
+        height: 1.25rem;
+        width: 1px;
+        margin-inline: 0.1rem 0.2rem;
+        background: var(--border-strong);
+    }
+
     .theme-toggle {
         border: 0;
         background: transparent;

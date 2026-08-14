@@ -9,22 +9,18 @@ type EmailLayoutProps = {
 };
 
 const colors = {
-    page: '#071933',
-    pageMid: '#102847',
-    pageEnd: '#050b16',
-    shell: '#0c1b32',
-    shellEdge: '#27496f',
-    text: '#f8fbff',
-    muted: '#b9cae3',
-    accent: '#8bc4ff',
-    accentStrong: '#4aa3ff',
-    accentSoft: '#123761',
-    panel: '#112748',
-    panelDeep: '#0d203c',
-    divider: '#1e3d63',
-    orbA: '#2d69c7',
-    orbB: '#183c6f',
-    orbC: '#96d7ff'
+    page: '#f4f5f7',
+    surface: '#ffffff',
+    surfaceSoft: '#f7f8fa',
+    header: '#111827',
+    headerMuted: '#c8d0dc',
+    text: '#111827',
+    muted: '#5f6978',
+    subtle: '#7c8796',
+    border: '#e2e6eb',
+    borderStrong: '#cfd5dd',
+    accent: '#2557d6',
+    accentSoft: '#eaf0ff'
 };
 
 const styles = {
@@ -33,9 +29,8 @@ const styles = {
     },
     body: {
         margin: '0',
-        padding: '32px 16px',
+        padding: '32px 12px',
         backgroundColor: colors.page,
-        backgroundImage: `radial-gradient(circle at top, #284a7a 0%, ${colors.pageMid} 34%, ${colors.page} 72%, ${colors.pageEnd} 100%)`,
         fontFamily: "'Segoe UI', Arial, sans-serif",
         color: colors.text
     },
@@ -52,93 +47,83 @@ const styles = {
         maxWidth: '0'
     },
     containerCell: {
-        padding: '6px 0'
+        padding: '4px 0'
     },
     shellTable: {
         width: '100%',
         maxWidth: '640px',
         borderCollapse: 'separate' as const,
         borderSpacing: '0',
-        backgroundColor: colors.shell,
-        backgroundImage: 'linear-gradient(180deg, rgba(255,255,255,0.07) 0%, rgba(255,255,255,0.03) 18%, rgba(8,17,31,0.88) 100%)',
-        border: `1px solid ${colors.shellEdge}`,
-        borderRadius: '30px',
+        backgroundColor: colors.surface,
+        border: `1px solid ${colors.borderStrong}`,
+        borderRadius: '24px',
         overflow: 'hidden',
-        boxShadow: '0 30px 80px rgba(3, 9, 19, 0.45), inset 0 1px 0 rgba(255,255,255,0.06)'
+        boxShadow: '0 18px 50px rgba(15, 23, 42, 0.10)'
     },
-    band: {
-        padding: '24px 28px 22px',
-        background: 'linear-gradient(135deg, rgba(18,42,75,0.96) 0%, rgba(21,62,118,0.94) 58%, rgba(74,163,255,0.34) 100%)',
-        borderBottom: `1px solid ${colors.divider}`
+    header: {
+        padding: '30px 32px',
+        backgroundColor: colors.header,
+        borderBottom: `1px solid ${colors.header}`
     },
-    heroTitleCell: {
-        paddingRight: '14px'
-    },
-    orbCell: {
-        width: '118px',
+    headerTitleCell: {
+        paddingRight: '20px',
         verticalAlign: 'middle' as const
+    },
+    monogramCell: {
+        width: '54px',
+        verticalAlign: 'middle' as const
+    },
+    monogram: {
+        width: '52px',
+        height: '52px',
+        borderRadius: '999px',
+        backgroundColor: colors.surface,
+        color: colors.header,
+        fontSize: '14px',
+        fontWeight: '700',
+        lineHeight: '52px',
+        letterSpacing: '0.12em',
+        textAlign: 'center' as const
     },
     eyebrow: {
         margin: '0',
-        fontSize: '12px',
-        letterSpacing: '0.22em',
+        fontSize: '11px',
+        letterSpacing: '0.2em',
         textTransform: 'uppercase' as const,
-        color: 'rgba(219, 234, 254, 0.8)'
+        color: colors.headerMuted
     },
     title: {
-        margin: '14px 0 0',
-        fontSize: '26px',
+        margin: '12px 0 0',
+        fontSize: '27px',
         lineHeight: '1.25',
         fontWeight: '700',
         color: '#ffffff'
     },
-    orbWrap: {
-        textAlign: 'right' as const,
-        fontSize: '0',
-        lineHeight: '0',
-        whiteSpace: 'nowrap' as const
-    },
-    orbLarge: {
-        display: 'inline-block',
-        width: '66px',
-        height: '66px',
-        borderRadius: '999px',
-        backgroundColor: colors.orbA,
-        backgroundImage: `radial-gradient(circle at 30% 30%, ${colors.orbC} 0%, ${colors.accentStrong} 22%, ${colors.orbA} 56%, ${colors.orbB} 100%)`,
-        border: '1px solid rgba(219,234,254,0.26)',
-        verticalAlign: 'middle' as const
-    },
-    orbMedium: {
-        display: 'inline-block',
-        width: '24px',
-        height: '24px',
-        borderRadius: '999px',
-        backgroundColor: '#20549d',
-        backgroundImage: 'radial-gradient(circle at 30% 30%, #d8f1ff 0%, #8bc4ff 28%, #20549d 100%)',
-        border: '1px solid rgba(219,234,254,0.2)',
-        marginLeft: '-12px',
-        marginTop: '28px',
-        verticalAlign: 'top' as const
-    },
     content: {
-        padding: '26px 28px',
-        background: 'linear-gradient(180deg, rgba(255,255,255,0.03) 0%, rgba(255,255,255,0.015) 100%)'
-    },
-    footer: {
-        padding: '0 28px 24px',
-        fontSize: '13px',
-        lineHeight: '1.7',
-        color: colors.muted
+        padding: '30px 32px 32px',
+        backgroundColor: colors.surface
     },
     footerDivider: {
-        margin: '0 28px 20px',
-        borderTop: `1px solid ${colors.divider}`
+        margin: '0 32px 18px',
+        borderTop: `1px solid ${colors.border}`
+    },
+    footer: {
+        padding: '0 32px 26px',
+        fontSize: '12px',
+        lineHeight: '1.7',
+        color: colors.subtle
     }
 };
 
 export const EmailLayout = ({preview, title, eyebrow, children, footerNote}: EmailLayoutProps) => {
     return (
         <html lang="en" style={styles.html}>
+            <head>
+                <meta charSet="utf-8"/>
+                <meta name="viewport" content="width=device-width, initial-scale=1"/>
+                <meta name="color-scheme" content="light"/>
+                <meta name="supported-color-schemes" content="light"/>
+            </head>
             <body style={styles.body}>
                 <div style={styles.preview}>{preview}</div>
                 <table role="presentation" width="100%" cellPadding="0" cellSpacing="0" style={styles.outerTable}>
@@ -154,19 +139,16 @@ export const EmailLayout = ({preview, title, eyebrow, children, footerNote}: Ema
                                 >
                                     <tbody>
                                         <tr>
-                                            <td style={styles.band}>
+                                            <td style={styles.header}>
                                                 <table role="presentation" width="100%" cellPadding="0" cellSpacing="0">
                                                     <tbody>
                                                         <tr>
-                                                            <td style={styles.heroTitleCell}>
+                                                            <td style={styles.headerTitleCell}>
                                                                 <p style={styles.eyebrow}>{eyebrow}</p>
                                                                 <h1 style={styles.title}>{title}</h1>
                                                             </td>
-                                                            <td style={styles.orbCell}>
-                                                                <div style={styles.orbWrap}>
-                                                                    <span style={styles.orbLarge}/>
-                                                                    <span style={styles.orbMedium}/>
-                                                                </div>
+                                                            <td style={styles.monogramCell}>
+                                                                <div style={styles.monogram}>LN</div>
                                                             </td>
                                                         </tr>
                                                     </tbody>
@@ -197,20 +179,20 @@ export const EmailLayout = ({preview, title, eyebrow, children, footerNote}: Ema
 
 export const emailBlockStyles = {
     intro: {
-        margin: '0 0 18px',
+        margin: '0',
         fontSize: '16px',
-        lineHeight: '1.75',
+        lineHeight: '1.7',
         color: colors.text
     },
     muted: {
         margin: '0',
         fontSize: '15px',
-        lineHeight: '1.75',
+        lineHeight: '1.7',
         color: colors.muted
     },
     label: {
         margin: '0 0 8px',
-        fontSize: '12px',
+        fontSize: '11px',
         letterSpacing: '0.18em',
         textTransform: 'uppercase' as const,
         color: colors.accent
@@ -218,50 +200,49 @@ export const emailBlockStyles = {
     card: {
         marginTop: '20px',
         padding: '18px 20px',
-        borderRadius: '20px',
-        backgroundColor: colors.panel,
-        backgroundImage: 'linear-gradient(180deg, rgba(255,255,255,0.11) 0%, rgba(255,255,255,0.04) 16%, rgba(5,11,22,0.18) 100%)',
-        border: `1px solid ${colors.shellEdge}`,
-        boxShadow: 'inset 0 1px 0 rgba(255,255,255,0.07), 0 12px 28px rgba(4, 11, 23, 0.16)'
+        borderRadius: '16px',
+        backgroundColor: colors.surfaceSoft,
+        border: `1px solid ${colors.border}`
     },
     messageCard: {
         marginTop: '20px',
         padding: '20px',
-        borderRadius: '22px',
-        background: 'linear-gradient(180deg, rgba(98,177,255,0.18) 0%, rgba(24,51,91,0.72) 24%, rgba(9,20,38,0.86) 100%)',
-        border: `1px solid ${colors.shellEdge}`,
-        boxShadow: 'inset 0 1px 0 rgba(255,255,255,0.08), 0 16px 34px rgba(3, 9, 19, 0.2)'
+        borderRadius: '18px',
+        backgroundColor: colors.surfaceSoft,
+        border: `1px solid ${colors.border}`,
+        borderLeft: `4px solid ${colors.accent}`
     },
     messageText: {
         margin: '0',
         fontSize: '15px',
-        lineHeight: '1.8',
+        lineHeight: '1.75',
         color: colors.text,
         whiteSpace: 'normal' as const
     },
     bulletList: {
-        margin: '18px 0 0',
-        paddingLeft: '18px',
+        margin: '14px 0 0',
+        paddingLeft: '20px',
         color: colors.muted,
         fontSize: '15px',
-        lineHeight: '1.8'
+        lineHeight: '1.75'
     },
     emailLink: {
         color: colors.accent,
-        textDecoration: 'none'
+        textDecoration: 'none',
+        fontWeight: '600'
     },
     chip: {
         display: 'inline-block',
         marginTop: '18px',
-        padding: '8px 14px',
+        padding: '8px 13px',
         borderRadius: '999px',
         backgroundColor: colors.accentSoft,
-        border: `1px solid ${colors.shellEdge}`,
-        color: colors.text,
+        border: `1px solid ${colors.border}`,
+        color: colors.accent,
         fontSize: '13px',
         fontWeight: '600'
     },
     emphasis: {
-        color: colors.accentStrong
+        color: colors.accent
     }
 };

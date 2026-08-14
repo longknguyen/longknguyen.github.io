@@ -79,15 +79,27 @@ export const Navigation = ({items, activeSection, theme, onToggleTheme, onNaviga
                     </button>
                 </nav>
 
-                <button
-                    type="button"
-                    className="mobile-menu-toggle inline-flex h-10 w-10 items-center justify-center rounded-full transition md:hidden"
-                    aria-expanded={isOpen}
-                    aria-label="Toggle navigation"
-                    onClick={() => setIsOpen((current) => !current)}
-                >
-                    {isOpen ? <X className="h-5 w-5"/> : <Menu className="h-5 w-5"/>}
-                </button>
+                <div className="flex items-center md:hidden">
+                    <button
+                        type="button"
+                        className="theme-toggle inline-flex h-11 w-11 items-center justify-center transition"
+                        aria-label={`Switch to ${theme === 'light' ? 'dark' : 'light'} mode`}
+                        title={`Switch to ${theme === 'light' ? 'dark' : 'light'} mode`}
+                        onClick={onToggleTheme}
+                    >
+                        {theme === 'light' ? <Moon className="h-4 w-4"/> : <Sun className="h-4 w-4"/>}
+                    </button>
+                    <span className="mobile-theme-divider" aria-hidden="true"/>
+                    <button
+                        type="button"
+                        className="mobile-menu-toggle inline-flex h-11 w-11 items-center justify-center rounded-full transition"
+                        aria-expanded={isOpen}
+                        aria-label="Toggle navigation"
+                        onClick={() => setIsOpen((current) => !current)}
+                    >
+                        {isOpen ? <X className="h-5 w-5"/> : <Menu className="h-5 w-5"/>}
+                    </button>
+                </div>
             </div>
 
             <div
@@ -112,14 +124,6 @@ export const Navigation = ({items, activeSection, theme, onToggleTheme, onNaviga
                             </button>
                         );
                     })}
-                    <button
-                        type="button"
-                        className="nav-link flex items-center gap-3 rounded-xl px-4 py-3 text-left text-sm font-medium transition"
-                        onClick={onToggleTheme}
-                    >
-                        {theme === 'light' ? <Moon className="h-4 w-4"/> : <Sun className="h-4 w-4"/>}
-                        {theme === 'light' ? 'Dark mode' : 'Light mode'}
-                    </button>
                 </nav>
             </div>
         </header>
