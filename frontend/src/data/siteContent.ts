@@ -1,11 +1,12 @@
 import type {LucideIcon} from 'lucide-react';
-import {Github, Linkedin, Mail} from 'lucide-react';
+import {Code2, FolderKanban, Github, GraduationCap, Home, Linkedin, Mail} from 'lucide-react';
 
 export type SectionId = 'home' | 'projects' | 'skills' | 'education' | 'contact';
 
 export type NavigationItem = {
     id: SectionId;
     label: string;
+    icon: LucideIcon;
 };
 
 export type SocialLink = {
@@ -28,11 +29,11 @@ export type SkillGroup = {
 };
 
 export const navigationItems: NavigationItem[] = [
-    {id: 'home', label: 'Home'},
-    {id: 'projects', label: 'Projects'},
-    {id: 'skills', label: 'Skills'},
-    {id: 'education', label: 'Education'},
-    {id: 'contact', label: 'Contact'}
+    {id: 'home', label: 'Home', icon: Home},
+    {id: 'projects', label: 'Projects', icon: FolderKanban},
+    {id: 'skills', label: 'Skills', icon: Code2},
+    {id: 'education', label: 'Education', icon: GraduationCap},
+    {id: 'contact', label: 'Contact', icon: Mail}
 ];
 
 export const socialLinks: SocialLink[] = [

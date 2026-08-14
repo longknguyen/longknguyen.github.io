@@ -13,6 +13,7 @@ type NavigationProps = {
 
 export const Navigation = ({items, activeSection, theme, onToggleTheme, onNavigate}: NavigationProps) => {
     const [isOpen, setIsOpen] = useState(false);
+    const isCompact = activeSection !== 'home';
 
     useEffect(() => {
         if (!isOpen) {
@@ -36,27 +37,36 @@ export const Navigation = ({items, activeSection, theme, onToggleTheme, onNaviga
 
     return (
         <header className="fixed inset-x-0 top-0 z-50 px-4 pt-4 sm:pt-5">
-            <div className="nav-shell mx-auto flex max-w-4xl items-center justify-between px-3 py-2.5">
+            <div className={`nav-shell mx-auto flex items-center justify-between px-3 py-2.5 ${isCompact ? 'nav-shell-compact' : ''}`}>
                 <button
                     type="button"
-                    className="nav-brand rounded-full px-3 py-2 text-xs font-bold uppercase tracking-[0.2em] transition"
+                    className="nav-brand rounded-full text-xs font-bold uppercase tracking-[0.2em] transition"
+                    aria-label="Go to Home"
                     onClick={() => handleNavigate('home')}
                 >
-                    Long Nguyen
+                    <span className="nav-brand-full">Long Nguyen</span>
+                    <span className="nav-brand-short" aria-hidden="true">LN</span>
                 </button>
 
                 <nav className="hidden items-center gap-1 md:flex" aria-label="Primary navigation">
-                    {items.map((item) => (
-                        <button
-                            key={item.id}
-                            type="button"
-                            className={`nav-link rounded-full px-3.5 py-2 text-sm font-medium transition ${activeSection === item.id ? 'nav-link-active' : ''}`}
-                            aria-current={activeSection === item.id ? 'page' : undefined}
-                            onClick={() => handleNavigate(item.id)}
-                        >
-                            {item.label}
-                        </button>
-                    ))}
+                    {items.map((item) => {
+                        const Icon = item.icon;
+                        const isActive = activeSection === item.id;
+
+                        return (
+                            <button
+                                key={item.id}
+                                type="button"
+                                className={`nav-link rounded-full px-3 py-2 text-sm font-medium transition ${isActive ? 'nav-link-active' : ''}`}
+                                aria-current={isActive ? 'page' : undefined}
+                                title={isCompact && !isActive ? item.label : undefined}
+                                onClick={() => handleNavigate(item.id)}
+                            >
+                                <Icon className="nav-link-icon h-4 w-4 shrink-0" aria-hidden="true"/>
+                                <span className="nav-link-label">{item.label}</span>
+                            </button>
+                        );
+                    })}
                     <button
                         type="button"
                         className="theme-toggle ml-1 inline-flex h-9 w-9 items-center justify-center rounded-full transition"
@@ -85,17 +95,22 @@ export const Navigation = ({items, activeSection, theme, onToggleTheme, onNaviga
                 }`}
             >
                 <nav className="flex flex-col gap-1 p-3" aria-label="Mobile navigation">
-                    {items.map((item) => (
-                        <button
-                            key={item.id}
-                            type="button"
-                            className={`nav-link rounded-xl px-4 py-3 text-left text-sm font-medium transition ${activeSection === item.id ? 'nav-link-active' : ''}`}
-                            aria-current={activeSection === item.id ? 'page' : undefined}
-                            onClick={() => handleNavigate(item.id)}
-                        >
-                            {item.label}
-                        </button>
-                    ))}
+                    {items.map((item) => {
+                        const Icon = item.icon;
+
+                        return (
+                            <button
+                                key={item.id}
+                                type="button"
+                                className={`nav-link rounded-xl px-4 py-3 text-left text-sm font-medium transition ${activeSection === item.id ? 'nav-link-active' : ''}`}
+                                aria-current={activeSection === item.id ? 'page' : undefined}
+                                onClick={() => handleNavigate(item.id)}
+                            >
+                                <Icon className="nav-link-icon h-4 w-4 shrink-0" aria-hidden="true"/>
+                                <span className="nav-link-label">{item.label}</span>
+                            </button>
+                        );
+                    })}
                     <button
                         type="button"
                         className="nav-link flex items-center gap-3 rounded-xl px-4 py-3 text-left text-sm font-medium transition"
