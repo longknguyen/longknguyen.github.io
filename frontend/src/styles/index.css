@@ -173,8 +173,7 @@ textarea:focus-visible {
     }
 
     .nav-brand:hover,
-    .nav-link:hover,
-    .mobile-menu-toggle:hover {
+    .nav-link:hover {
         background: var(--surface-hover);
         color: var(--text-primary);
     }
@@ -284,9 +283,13 @@ textarea:focus-visible {
     }
 
     .mobile-menu-toggle {
-        border: 1px solid var(--border);
-        background: var(--surface-soft);
+        border: 0;
+        background: transparent;
         color: var(--text-secondary);
+    }
+
+    .mobile-menu-toggle:hover {
+        color: var(--text-primary);
     }
 
     .hero-section {

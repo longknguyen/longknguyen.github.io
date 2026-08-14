@@ -97,7 +97,7 @@ export const Navigation = ({items, activeSection, theme, onToggleTheme, onNaviga
                         aria-label="Toggle navigation"
                         onClick={() => setIsOpen((current) => !current)}
                     >
-                        {isOpen ? <X className="h-5 w-5"/> : <Menu className="h-5 w-5"/>}
+                        {isOpen ? <X className="h-4 w-4"/> : <Menu className="h-4 w-4"/>}
                     </button>
                 </div>
             </div>
